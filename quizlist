@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sınav ve Test Portalım</title>
+    <style>
+        :root {
+            --bg-color: #f0fdf4;
+            --card-bg: #ffffff;
+            --primary: #16a34a;
+            --primary-hover: #15803d;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: '-apple-system', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .header h1 {
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .quiz-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .quiz-card {
+            background-color: var(--card-bg);
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+
+        .quiz-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 6px rgba(22, 163, 74, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .quiz-info h2 {
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .quiz-info p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .arrow {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Hazırlık Testleri Portalı</h1>
+            <p>Çalışmak istediğiniz modülü seçin</p>
+        </div>
+
+        <div class="quiz-grid">
+            
+            <a href="https://cengizkaya4.github.io/devletarsivhizmetleriyonetmeligi/" class="quiz-card">
+                <div class="quiz-info">
+                    <h2>Devlet Arşiv Hizmetleri Yönetmeliği</h2>
+                    <p>Arşiv mevzuatı ve dosyalama kuralları (45 Soru)</p>
+                </div>
+                <div class="arrow">→</div>
+            </a>
+
+            <a href="https://cengizkaya4.github.io/uyum-prosed-rleri-test-01/" class="quiz-card">
+                <div class="quiz-info">
+                    <h2>Uyum Prosedürleri Testi 01</h2>
+                    <p>İdari yaptırımlar ve uyum süreçleri</p>
+                </div>
+                <div class="arrow">→</div>
+            </a>
+
+            <a href="https://cengizkaya4.github.io/genelilgilimevzuat-6331-sayili-isg-kanunu/" class="quiz-card">
+                <div class="quiz-info">
+                    <h2>6331 Sayılı İSG Kanunu</h2>
+                    <p>İş Sağlığı ve Güvenliği genel mevzuatı</p>
+                </div>
+                <div class="arrow">→</div>
+            </a>
+
+            <a href="https://cengizkaya4.github.io/ehkquiz/" class="quiz-card">
+                <div class="quiz-info">
+                    <h2>EHK Quiz</h2>
+                    <p>EHK mevzuatı değerlendirme testi</p>
+                </div>
+                <div class="arrow">→</div>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>
