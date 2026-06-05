@@ -6,13 +6,11 @@
     <title>Ptt UZMAN</title>
     
     <!-- iPhone İkonu Tanımlamaları -->
-    <link rel="apple-touch-icon" href="https://cengizkaya4.github.io/mainpage.html/icon.PNG">
-    <link rel="apple-touch-icon-precomposed" href="icon.png">
+    <link rel="apple-touch-icon" href="https://cengizkaya4.github.io/icon.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="PTT UZMAN">
 
-    <!-- Service Worker (Çevrimdışı çalışma için) -->
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
@@ -30,21 +28,17 @@
             --text-muted: #6b7280;
             --border-color: #e2e8f0;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: '-apple-system', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-
         body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; padding: 2rem 1rem; }
         .container { max-width: 700px; margin: 0 auto; }
         .header { text-align: center; margin-bottom: 2.5rem; }
         .header h1 { font-size: 1.75rem; color: var(--primary); margin-bottom: 0.5rem; }
         .header p { color: var(--text-muted); font-size: 1rem; }
-
         .category-group { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 1rem; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .category-header { padding: 1.25rem 1.5rem; background-color: #f8fafc; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: var(--text-main); font-size: 1.1rem; }
         .category-header.active { background-color: #dcfce7; color: var(--primary); border-bottom: 1px solid var(--border-color); }
         .category-content { display: none; padding: 1.5rem; background-color: #ffffff; }
         .category-content.active { display: grid; gap: 1rem; }
-
         .quiz-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.25rem; text-decoration: none; color: var(--text-main); display: flex; align-items: center; justify-content: space-between; transition: all 0.2s ease; }
         .quiz-card:hover { border-color: var(--primary); box-shadow: 0 4px 6px rgba(22, 163, 74, 0.1); }
         .quiz-info h2 { font-size: 1rem; margin-bottom: 0.25rem; }
@@ -60,62 +54,34 @@
             <p>Çalışmak istediğiniz modülü seçin</p>
         </div>
 
-        <!-- 1. KATEGORİ -->
-        <div class="category-group">
-            <div class="category-header" onclick="toggleCategory(this)">
-                <span>1. GENEL İLGİLİ MEVZUAT</span>
-                <span>▼</span>
-            </div>
-            <div class="category-content">
-                  <a href="https://cengizkaya4.github.io/resmiyazismayonetmeligi//" class="quiz-card">
-                    <div class="quiz-info"><h2>Resmi Yazışmalarda Uygulanacak Usul ve Esaslar Hakkında Yönetmelik</h2><p>(50 Soru)</p></div>
-                    <div class="arrow">→</div>
-                </a>
-                <a href="https://cengizkaya4.github.io/devletarsivhizmetleriyonetmeligi/" class="quiz-card">
-                    <div class="quiz-info"><h2>Devlet Arşiv Hizmetleri Hakkında Yönetmelik</h2><p>(45 Soru)</p></div>
-                    <div class="arrow">→</div>
-                </a>
-                <a href="https://cengizkaya4.github.io/genelilgilimevzuat-6331-sayili-isg-kanunu/" class="quiz-card">
-                    <div class="quiz-info"><h2>6331 sayılı İş Sağlığı ve Güvenliği Kanunu</h2><p>(25 Soru)</p></div>
-                    <div class="arrow">→</div>
-                </a>
-            </div>
-        </div>
-
-        <!-- 2. KATEGORİ -->
-        <div class="category-group">
-            <div class="category-header" onclick="toggleCategory(this)">
-                <span>2. DİĞER ÖNEMLİ OPERASYONEL ALANLAR</span>
-                <span>▼</span>
-            </div>
-            <div class="category-content">
-                <a href="https://cengizkaya4.github.io/uyum-prosed-rleri-test-01/" class="quiz-card">
-                    <div class="quiz-info"><h2>Uyum Birimi Prosedürleri</h2><p>(18 Soru)</p></div>
-                    <div class="arrow">→</div>
-                </a>
-            </div>
-        </div>
-
-        <!-- 3. KATEGORİ -->
-        <div class="category-group">
-            <div class="category-header" onclick="toggleCategory(this)">
-                <span>3. POSTA - KARGO - ELEKTRONİK POSTA VE REGÜLASYON</span>
-                <span>▼</span>
-            </div>
-            <div class="category-content">
-                <a href="https://cengizkaya4.github.io/ehkquiz/" class="quiz-card">
-                    <div class="quiz-info"><h2>5809 sayılı Elektronik Haberleşme Kanunu</h2><p>(22 Soru)</p></div>
-                    <div class="arrow">→</div>
-                </a>
-            </div>
-        </div>
-
-        <!-- 4-8. BOŞ KATEGORİLER -->
-        <div class="category-group"><div class="category-header" onclick="toggleCategory(this)"><span>4. KATEGORİ İSMİ</span><span>▼</span></div><div class="category-content"><p style="text-align:center;color:var(--text-muted);">Buraya test eklemediniz.</p></div></div>
-        <div class="category-group"><div class="category-header" onclick="toggleCategory(this)"><span>5. KATEGORİ İSMİ</span><span>▼</span></div><div class="category-content"><p style="text-align:center;color:var(--text-muted);">Buraya test eklemediniz.</p></div></div>
-        <div class="category-group"><div class="category-header" onclick="toggleCategory(this)"><span>6. KATEGORİ İSMİ</span><span>▼</span></div><div class="category-content"><p style="text-align:center;color:var(--text-muted);">Buraya test eklemediniz.</p></div></div>
-        <div class="category-group"><div class="category-header" onclick="toggleCategory(this)"><span>7. KATEGORİ İSMİ</span><span>▼</span></div><div class="category-content"><p style="text-align:center;color:var(--text-muted);">Buraya test eklemediniz.</p></div></div>
-        <div class="category-group"><div class="category-header" onclick="toggleCategory(this)"><span>8. KATEGORİ İSMİ</span><span>▼</span></div><div class="category-content"><p style="text-align:center;color:var(--text-muted);">Buraya test eklemediniz.</p></div></div>
+        <!-- Kategoriler (image_990a69.png referans alınarak sıralanmıştır) -->
+        <div class="category-group"><div class="category-header" onclick="toggleCategory(this)"><span>PTT İLE İLGİLİ GENEL MEVZUAT</span><span>▼</span></div><div class="category-content"><p style="text-align:center;color:var(--text-muted);">Henüz test eklenmedi.</p></div></div>
+        
+        <div class="category-group"><div class="category-header" onclick="toggleCategory(this)"><span>POSTA - KARGO - ELEKTRONİK POSTA VE REGÜLASYON</span><span>▼</span></div><div class="category-content">
+            <a href="https://cengizkaya4.github.io/ehkquiz/" class="quiz-card"><div class="quiz-info"><h2>5809 sayılı Elektronik Haberleşme Kanunu</h2><p>(22 Soru)</p></div><div class="arrow">→</div></a>
+        </div></div>
+        
+        <div class="category-group"><div class="category-header" onclick="toggleCategory(this)"><span>PTTBANK/ ÖDEME SİSTEMLERİ / FİNANSAL HİZMETLER</span><span>▼</span></div><div class="category-content"><p style="text-align:center;color:var(--text-muted);">Henüz test eklenmedi.</p></div></div>
+        
+        <div class="category-group"><div class="category-header" onclick="toggleCategory(this)"><span>İNSAN KAYNAKLARI - İSG</span><span>▼</span></div><div class="category-content"><p style="text-align:center;color:var(--text-muted);">Henüz test eklenmedi.</p></div></div>
+        
+        <div class="category-group"><div class="category-header" onclick="toggleCategory(this)"><span>FINANS - MUHASEBE</span><span>▼</span></div><div class="category-content"><p style="text-align:center;color:var(--text-muted);">Henüz test eklenmedi.</p></div></div>
+        
+        <div class="category-group"><div class="category-header" onclick="toggleCategory(this)"><span>SATINALMA - DESTEK</span><span>▼</span></div><div class="category-content"><p style="text-align:center;color:var(--text-muted);">Henüz test eklenmedi.</p></div></div>
+        
+        <div class="category-group"><div class="category-header" onclick="toggleCategory(this)"><span>YAPI - İŞ YERLERİ</span><span>▼</span></div><div class="category-content"><p style="text-align:center;color:var(--text-muted);">Henüz test eklenmedi.</p></div></div>
+        
+        <div class="category-group"><div class="category-header" onclick="toggleCategory(this)"><span>BİLGİ TEKNOLOJİLERİ VE GÜVENLİĞİ - BİLİŞİM</span><span>▼</span></div><div class="category-content"><p style="text-align:center;color:var(--text-muted);">Henüz test eklenmedi.</p></div></div>
+        
+        <div class="category-group"><div class="category-header" onclick="toggleCategory(this)"><span>DİĞER ÖNEMLİ OPERASYONEL ALANLAR</span><span>▼</span></div><div class="category-content">
+            <a href="https://cengizkaya4.github.io/uyum-prosed-rleri-test-01/" class="quiz-card"><div class="quiz-info"><h2>Uyum Birimi Prosedürleri</h2><p>(18 Soru)</p></div><div class="arrow">→</div></a>
+        </div></div>
+        
+        <div class="category-group"><div class="category-header" onclick="toggleCategory(this)"><span>GENEL İLGİLİ MEVZUAT</span><span>▼</span></div><div class="category-content">
+            <a href="https://cengizkaya4.github.io/resmiyazismayonetmeligi/" class="quiz-card"><div class="quiz-info"><h2>Resmi Yazışmalarda Uygulanacak Usul ve Esaslar Hakkında Yönetmelik</h2><p>(50 Soru)</p></div><div class="arrow">→</div></a>
+            <a href="https://cengizkaya4.github.io/devletarsivhizmetleriyonetmeligi/" class="quiz-card"><div class="quiz-info"><h2>Devlet Arşiv Hizmetleri Hakkında Yönetmelik</h2><p>(45 Soru)</p></div><div class="arrow">→</div></a>
+            <a href="https://cengizkaya4.github.io/genelilgilimevzuat-6331-sayili-isg-kanunu/" class="quiz-card"><div class="quiz-info"><h2>6331 sayılı İş Sağlığı ve Güvenliği Kanunu</h2><p>(25 Soru)</p></div><div class="arrow">→</div></a>
+        </div></div>
     </div>
 
     <script>
