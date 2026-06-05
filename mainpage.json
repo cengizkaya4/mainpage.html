@@ -1,0 +1,15 @@
+{
+  "name": "Kişisel Sınav Portalım",
+  "short_name": "Sınavlar",
+  "start_url": "./mainpage.html",
+  "display": "standalone",
+  "background_color": "#f0fdf4",
+  "theme_color": "#16a34a",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3203/3203380.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
