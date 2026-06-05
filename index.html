@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sınav ve Test Portalım</title>
     
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3203/3203380.png">
+    <!-- İkon Tanımlaması -->
+    <link rel="apple-touch-icon" href="icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="PTT UZMAN">
 
+    <!-- Service Worker (Çevrimdışı çalışma için) -->
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
@@ -21,142 +24,30 @@
             --bg-color: #f0fdf4;
             --card-bg: #ffffff;
             --primary: #16a34a;
-            --primary-hover: #15803d;
             --text-main: #1f2937;
             --text-muted: #6b7280;
             --border-color: #e2e8f0;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: '-apple-system', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: '-apple-system', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding: 2rem 1rem;
-        }
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; padding: 2rem 1rem; }
+        .container { max-width: 700px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 2.5rem; }
+        .header h1 { font-size: 1.75rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .header p { color: var(--text-muted); font-size: 1rem; }
 
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-        }
+        .category-group { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 1rem; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .category-header { padding: 1.25rem 1.5rem; background-color: #f8fafc; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: var(--text-main); font-size: 1.1rem; }
+        .category-header.active { background-color: #dcfce7; color: var(--primary); border-bottom: 1px solid var(--border-color); }
+        .category-content { display: none; padding: 1.5rem; background-color: #ffffff; }
+        .category-content.active { display: grid; gap: 1rem; }
 
-        .header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .header h1 {
-            font-size: 1.75rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .header p {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-
-        /* Akordiyon (Kategori) Tasarımı */
-        .category-group {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .category-header {
-            padding: 1.25rem 1.5rem;
-            background-color: #f8fafc;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: bold;
-            color: var(--text-main);
-            font-size: 1.1rem;
-            transition: background-color 0.2s ease;
-        }
-
-        .category-header:hover {
-            background-color: #e2e8f0;
-        }
-
-        .category-header.active {
-            background-color: #dcfce7;
-            color: var(--primary);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .toggle-icon {
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
-            color: var(--primary);
-        }
-
-        .category-header.active .toggle-icon {
-            transform: rotate(180deg);
-        }
-
-        .category-content {
-            display: none;
-            padding: 1.5rem;
-            background-color: #ffffff;
-        }
-
-        .category-content.active {
-            display: grid;
-            gap: 1rem;
-            animation: fadeIn 0.3s ease;
-        }
-
-        /* Test Kartları Tasarımı */
-        .quiz-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.25rem;
-            text-decoration: none;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: all 0.2s ease;
-        }
-
-        .quiz-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 4px 6px rgba(22, 163, 74, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .quiz-info h2 {
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .quiz-info p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .arrow {
-            color: var(--primary);
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .quiz-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.25rem; text-decoration: none; color: var(--text-main); display: flex; align-items: center; justify-content: space-between; transition: all 0.2s ease; }
+        .quiz-card:hover { border-color: var(--primary); box-shadow: 0 4px 6px rgba(22, 163, 74, 0.1); }
+        .quiz-info h2 { font-size: 1rem; margin-bottom: 0.25rem; }
+        .quiz-info p { font-size: 0.85rem; color: var(--text-muted); }
+        .arrow { color: var(--primary); font-size: 1.5rem; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -170,22 +61,15 @@
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
                 <span>1. GENEL İLGİLİ MEVZUAT</span>
-                <span class="toggle-icon">▼</span>
+                <span>▼</span>
             </div>
             <div class="category-content">
                 <a href="https://cengizkaya4.github.io/devletarsivhizmetleriyonetmeligi/" class="quiz-card">
-                    <div class="quiz-info">
-                        <h2>Devlet Arşiv Hizmetleri Hakkında Yönetmelik</h2>
-                        <p>(45 Soru)</p>
-                    </div>
+                    <div class="quiz-info"><h2>Devlet Arşiv Hizmetleri Hakkında Yönetmelik</h2><p>(45 Soru)</p></div>
                     <div class="arrow">→</div>
                 </a>
-
                 <a href="https://cengizkaya4.github.io/genelilgilimevzuat-6331-sayili-isg-kanunu/" class="quiz-card">
-                    <div class="quiz-info">
-                        <h2>6331 sayılı İş Sağlığı ve Güvenliği Kanunu</h2>
-                        <p>(25 Soru)</p>
-                    </div>
+                    <div class="quiz-info"><h2>6331 sayılı İş Sağlığı ve Güvenliği Kanunu</h2><p>(25 Soru)</p></div>
                     <div class="arrow">→</div>
                 </a>
             </div>
@@ -194,72 +78,35 @@
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
                 <span>2. DİĞER ÖNEMLİ OPERASYONEL ALANLAR</span>
-                <span class="toggle-icon">▼</span>
+                <span>▼</span>
             </div>
             <div class="category-content">
                 <a href="https://cengizkaya4.github.io/uyum-prosed-rleri-test-01/" class="quiz-card">
-                    <div class="quiz-info">
-                        <h2>Uyum Birimi Prosedürleri</h2>
-                        <p>(18 Soru)</p>
-                    </div>
+                    <div class="quiz-info"><h2>Uyum Birimi Prosedürleri</h2><p>(18 Soru)</p></div>
                     <div class="arrow">→</div>
                 </a>
-                
-                </div>
+            </div>
         </div>
 
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
                 <span>3. POSTA - KARGO - ELEKTRONİK POSTA VE REGÜLASYON</span>
-                <span class="toggle-icon">▼</span>
+                <span>▼</span>
             </div>
             <div class="category-content">
                 <a href="https://cengizkaya4.github.io/ehkquiz/" class="quiz-card">
-                    <div class="quiz-info">
-                        <h2>5809 sayılı Elektronik Haberleşme Kanunu</h2>
-                        <p>(22 Soru)</p>
-                    </div>
+                    <div class="quiz-info"><h2>5809 sayılı Elektronik Haberleşme Kanunu</h2><p>(22 Soru)</p></div>
                     <div class="arrow">→</div>
                 </a>
             </div>
         </div>
-
-        <div class="category-group">
-            <div class="category-header" onclick="toggleCategory(this)">
-                <span>4. KATEGORİ İSMİ BURAYA GELECEK</span>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <div class="category-content">
-                <p style="color: var(--text-muted); font-size: 0.9rem; text-align: center;">Bu kategoriye henüz test eklenmedi.</p>
-                </div>
-        </div>
-
-        <div class="category-group">
-            <div class="category-header" onclick="toggleCategory(this)">
-                <span>5. KATEGORİ İSMİ BURAYA GELECEK</span>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <div class="category-content">
-                <p style="color: var(--text-muted); font-size: 0.9rem; text-align: center;">Bu kategoriye henüz test eklenmedi.</p>
-            </div>
-        </div>
-        
-        </div>
+    </div>
 
     <script>
-        function toggleCategory(headerElement) {
-            const content = headerElement.nextElementSibling;
-            
-            // Eğer tıklanan kategori zaten açıksa, kapat.
-            if (content.classList.contains('active')) {
-                content.classList.remove('active');
-                headerElement.classList.remove('active');
-            } 
-            // Eğer kapalıysa, aç. (İsterseniz burada diğer açık olanları kapatma kodu da eklenebilir)
-            else {
-                content.classList.add('active');
-                headerElement.classList.add('active');
-            }
+        function toggleCategory(el) {
+            const content = el.nextElementSibling;
+            content.classList.toggle('active');
+            el.classList.toggle('active');
         }
     </script>
 
