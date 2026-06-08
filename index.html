@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ptt UZMAN</title>
     
+    <!-- iPhone İkonu Tanımlamaları -->
     <link rel="apple-touch-icon" href="https://cengizkaya4.github.io/icon.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -20,37 +21,81 @@
 
     <style>
         :root {
-            --bg-color: #f0fdf4;
+            --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --primary: #16a34a;
-            --text-main: #1f2937;
-            --text-muted: #6b7280;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
             --border-color: #e2e8f0;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: '-apple-system', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; padding: 2rem 1rem; }
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; padding: 1.5rem 1rem; }
         .container { max-width: 700px; margin: 0 auto; }
-        .header { text-align: center; margin-bottom: 2.5rem; }
-        .header h1 { font-size: 1.75rem; color: var(--primary); margin-bottom: 0.5rem; }
-        .header p { color: var(--text-muted); font-size: 1rem; }
         
-        .category-group { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 1rem; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .category-header { padding: 1.25rem 1.5rem; background-color: #f8fafc; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: var(--text-main); font-size: 1.1rem; transition: background-color 0.2s; }
+        /* Üst Başlık */
+        .header { text-align: center; margin-bottom: 2rem; }
+        .header h1 { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.25rem; font-weight: 700; }
+        .header p { color: var(--text-muted); font-size: 0.9rem; }
+        
+        /* Kategoriler */
+        .category-group { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 0.8rem; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+        
+        /* Kategori Başlığı ve Mobil Uyum Ayarları */
+        .category-header { 
+            padding: 1rem 1.2rem; 
+            background-color: #ffffff; 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            color: var(--text-main); 
+            transition: all 0.2s ease;
+            gap: 10px; /* Sol ve sağ kısım arasına boşluk */
+        }
         .category-header:hover { background-color: #f1f5f9; }
-        .category-header.active { background-color: #dcfce7; color: var(--primary); border-bottom: 1px solid var(--border-color); }
+        .category-header.active { background-color: #f0fdf4; border-bottom: 1px solid var(--border-color); }
         
-        /* Sağ Taraf Düzeni (Test Sayısı ve Ok İşareti) */
-        .header-right { display: flex; align-items: center; gap: 12px; }
-        .test-count { font-size: 0.85rem; font-weight: 500; color: #475569; background-color: #e2e8f0; padding: 2px 10px; border-radius: 20px; }
+        .category-title {
+            font-size: 0.95rem; /* Başlıklar küçültüldü */
+            font-weight: 600;
+            line-height: 1.3;
+            flex: 1; /* Uzun yazılar sol tarafı kaplasın, alt satıra kaysın ama sağ tarafı bozmasın */
+        }
+
+        /* Sağ Taraf Asla Alt Satıra Kaymaz */
+        .header-right { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            flex-shrink: 0; /* Bu alanın sıkışmasını ve ezilmesini kesin engeller */
+            white-space: nowrap; /* Ok ve rozetin yan yana kalmasını garanti eder */
+        }
+        
+        /* Test Sayısı Rozeti */
+        .test-count { 
+            font-size: 0.75rem; /* Rozet yazısı küçültüldü */
+            font-weight: 600; 
+            color: #1e293b; 
+            background-color: #f1f5f9; 
+            padding: 3px 8px; 
+            border-radius: 6px; 
+            letter-spacing: 0.3px;
+        }
         .category-header.active .test-count { background-color: #bbf7d0; color: #166534; }
         
-        .category-content { display: none; padding: 1.5rem; background-color: #ffffff; }
-        .category-content.active { display: grid; gap: 1rem; }
-        .quiz-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.25rem; text-decoration: none; color: var(--text-main); display: flex; align-items: center; justify-content: space-between; transition: all 0.2s ease; }
-        .quiz-card:hover { border-color: var(--primary); box-shadow: 0 4px 6px rgba(22, 163, 74, 0.1); }
-        .quiz-info h2 { font-size: 1rem; margin-bottom: 0.25rem; }
-        .quiz-info p { font-size: 0.85rem; color: var(--text-muted); }
-        .arrow { color: var(--primary); font-size: 1.5rem; font-weight: bold; }
+        /* Ok İşareti */
+        .toggle-arrow { font-size: 0.8rem; color: #94a3b8; transition: transform 0.3s ease; }
+        .category-header.active .toggle-arrow { transform: rotate(180deg); color: var(--primary); }
+
+        /* Test İçerikleri */
+        .category-content { display: none; padding: 1.25rem; background-color: #fafafa; }
+        .category-content.active { display: grid; gap: 0.75rem; }
+        
+        .quiz-card { background-color: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; text-decoration: none; color: var(--text-main); display: flex; align-items: center; justify-content: space-between; transition: all 0.2s ease; }
+        .quiz-card:hover { border-color: var(--primary); box-shadow: 0 4px 6px rgba(22, 163, 74, 0.08); transform: translateY(-1px); }
+        .quiz-info h2 { font-size: 0.95rem; margin-bottom: 0.2rem; color: #0f172a; }
+        .quiz-info p { font-size: 0.8rem; color: var(--text-muted); }
+        .arrow { color: var(--primary); font-size: 1.2rem; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -61,50 +106,55 @@
             <p>Çalışmak istediğiniz modülü seçin</p>
         </div>
 
+        <!-- 1. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
-                <span>PTT İLE İLGİLİ GENEL MEVZUAT</span>
-                <div class="header-right"><span class="test-count"></span><span>▼</span></div>
+                <span class="category-title">🏛️ PTT İLE İLGİLİ GENEL MEVZUAT</span>
+                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
             </div>
             <div class="category-content">
-                <p style="text-align:center;color:var(--text-muted);">Henüz test eklenmedi.</p>
+                <p style="text-align:center;color:var(--text-muted);font-size:0.9rem;">Henüz test eklenmedi.</p>
             </div>
         </div>
         
+        <!-- 2. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
-                <span>POSTA - KARGO - ELEKTRONİK POSTA VE REGÜLASYON</span>
-                <div class="header-right"><span class="test-count"></span><span>▼</span></div>
+                <span class="category-title">📦 POSTA - KARGO - E-POSTA VE REGÜLASYON</span>
+                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
             </div>
             <div class="category-content">
                 <a href="https://cengizkaya4.github.io/ehkquiz/" class="quiz-card"><div class="quiz-info"><h2>5809 sayılı Elektronik Haberleşme Kanunu</h2><p>(22 Soru)</p></div><div class="arrow">→</div></a>
             </div>
         </div>
         
+        <!-- 3. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
-                <span>PTTBANK/ ÖDEME SİSTEMLERİ / FİNANSAL HİZMETLER</span>
-                <div class="header-right"><span class="test-count"></span><span>▼</span></div>
+                <span class="category-title">💳 PTTBANK / ÖDEME SİSTEMLERİ / FİNANS</span>
+                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
             </div>
             <div class="category-content">
-                <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/0402c63a-7899-4890-bbe7-d7bd5da744f7?utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>Banka Kartları ve Kredi Kartları Kanunu / Yönetmeliği </h2><p>(50 Soru)</p></div><div class="arrow">→</div></a>
+                <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/0402c63a-7899-4890-bbe7-d7bd5da744f7?utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>Banka Kartları ve Kredi Kartları Kanunu / Yönetmeliği</h2><p>(50 Soru)</p></div><div class="arrow">→</div></a>
             </div>
         </div>
         
+        <!-- 4. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
-                <span>İNSAN KAYNAKLARI - İSG</span>
-                <div class="header-right"><span class="test-count"></span><span>▼</span></div>
+                <span class="category-title">👥 İNSAN KAYNAKLARI - İSG</span>
+                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
             </div>
             <div class="category-content">
-                <p style="text-align:center;color:var(--text-muted);">Henüz test eklenmedi.</p>
+                <p style="text-align:center;color:var(--text-muted);font-size:0.9rem;">Henüz test eklenmedi.</p>
             </div>
         </div>
         
+        <!-- 5. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
-                <span>FINANS - MUHASEBE</span>
-                <div class="header-right"><span class="test-count"></span><span>▼</span></div>
+                <span class="category-title">📊 FİNANS - MUHASEBE</span>
+                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
             </div>
             <div class="category-content">
                 <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/4d46bb81-81de-4f30-9133-fb136f6f2083?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" class="quiz-card" target="_blank" rel="noopener">
@@ -112,50 +162,55 @@
             </div>
         </div>
         
+        <!-- 6. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
-                <span>SATINALMA - DESTEK</span>
-                <div class="header-right"><span class="test-count"></span><span>▼</span></div>
+                <span class="category-title">🛒 SATINALMA - DESTEK</span>
+                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
             </div>
             <div class="category-content">
-                <p style="text-align:center;color:var(--text-muted);">Henüz test eklenmedi.</p>
+                <p style="text-align:center;color:var(--text-muted);font-size:0.9rem;">Henüz test eklenmedi.</p>
             </div>
         </div>
         
+        <!-- 7. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
-                <span>YAPI - İŞ YERLERİ</span>
-                <div class="header-right"><span class="test-count"></span><span>▼</span></div>
+                <span class="category-title">🏗️ YAPI - İŞ YERLERİ</span>
+                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
             </div>
             <div class="category-content">
-                <p style="text-align:center;color:var(--text-muted);">Henüz test eklenmedi.</p>
+                <p style="text-align:center;color:var(--text-muted);font-size:0.9rem;">Henüz test eklenmedi.</p>
             </div>
         </div>
         
+        <!-- 8. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
-                <span>BİLGİ TEKNOLOJİLERİ VE GÜVENLİĞİ - BİLİŞİM</span>
-                <div class="header-right"><span class="test-count"></span><span>▼</span></div>
+                <span class="category-title">💻 BİLGİ TEKNOLOJİLERİ VE GÜVENLİĞİ</span>
+                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
             </div>
             <div class="category-content">
-                <p style="text-align:center;color:var(--text-muted);">Henüz test eklenmedi.</p>
+                <p style="text-align:center;color:var(--text-muted);font-size:0.9rem;">Henüz test eklenmedi.</p>
             </div>
         </div>
         
+        <!-- 9. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
-                <span>DİĞER ÖNEMLİ OPERASYONEL ALANLAR</span>
-                <div class="header-right"><span class="test-count"></span><span>▼</span></div>
+                <span class="category-title">⚙️ DİĞER ÖNEMLİ OPERASYONEL ALANLAR</span>
+                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
             </div>
             <div class="category-content">
                 <a href="https://cengizkaya4.github.io/uyum-prosed-rleri-test-01/" class="quiz-card"><div class="quiz-info"><h2>Uyum Birimi Prosedürleri</h2><p>(18 Soru)</p></div><div class="arrow">→</div></a>
             </div>
         </div>
         
+        <!-- 10. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
-                <span>GENEL İLGİLİ MEVZUAT</span>
-                <div class="header-right"><span class="test-count"></span><span>▼</span></div>
+                <span class="category-title">⚖️ GENEL İLGİLİ MEVZUAT</span>
+                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
             </div>
             <div class="category-content">
                 <a href="https://notebooklm.google.com/notebook/eccb268d-8854-44d8-b406-ea95cf30a3fe/artifact/e3b2ff2d-7753-48ba-973d-2b47f733aa31" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>Resmi Yazışmalarda Uygulanacak Usul ve Esaslar Hakkında Yönetmelik</h2><p>(50 Soru)</p></div><div class="arrow">→</div></a>
@@ -166,33 +221,34 @@
     </div>
 
     <script>
-        // Açılır kapanır menü fonksiyonu
         function toggleCategory(el) {
             const content = el.nextElementSibling;
             content.classList.toggle('active');
             el.classList.toggle('active');
         }
 
-        // Sayfa yüklendiğinde her kategori için test sayısını otomatik hesapla
         document.addEventListener('DOMContentLoaded', () => {
             const groups = document.querySelectorAll('.category-group');
             
             groups.forEach(group => {
                 const content = group.querySelector('.category-content');
                 const countSpan = group.querySelector('.test-count');
+                const titleSpan = group.querySelector('.category-title');
                 
-                // Kategori içindeki "quiz-card" (test linkleri) sayısını bul
                 const testCount = content.querySelectorAll('.quiz-card').length;
                 
-                // Sayıya göre sağ taraftaki metni ve görünümü ayarla
                 if(testCount > 0) {
-                    countSpan.textContent = `Test Sayısı: ${testCount}`;
+                    countSpan.textContent = `${testCount} Test`;
+                    // Doluysa başlık biraz daha belirgin olsun
+                    titleSpan.style.color = '#0f172a';
                 } else {
-                    countSpan.textContent = `Test Yok`;
-                    // Test yoksa kapsülün arka planını gizle ve yazıyı soluklaştır
+                    countSpan.textContent = `Boş`;
+                    // Boş kategoriler daha silik görünsün
                     countSpan.style.backgroundColor = 'transparent';
-                    countSpan.style.border = '1px solid #cbd5e1';
+                    countSpan.style.border = '1px solid #e2e8f0';
                     countSpan.style.color = '#94a3b8';
+                    titleSpan.style.color = '#64748b';
+                    titleSpan.style.fontWeight = '500';
                 }
             });
         });
