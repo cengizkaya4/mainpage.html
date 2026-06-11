@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ptt UZMAN</title>
     
-    <!-- iPhone ve Tarayıcı İkonu Tanımlamaları -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/cengizkaya4/mainpage.html/refs/heads/main/icon.PNG">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/cengizkaya4/mainpage.html/refs/heads/main/icon.PNG">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -38,9 +37,10 @@
             --badge-active-text: #166534;
             --quiz-hover-shadow: rgba(22, 163, 74, 0.08);
             --empty-badge-border: #cbd5e1;
+            --sub-header-bg: #f1f5f9;
         }
 
-        /* KOYU MOD (Sistem koyu temadaysa otomatik devreye girer) */
+        /* KOYU MOD */
         @media (prefers-color-scheme: dark) {
             :root {
                 --bg-color: #0f172a;
@@ -58,6 +58,7 @@
                 --badge-active-text: #a7f3d0;
                 --quiz-hover-shadow: rgba(34, 197, 94, 0.15);
                 --empty-badge-border: #475569;
+                --sub-header-bg: #1e293b;
             }
         }
 
@@ -70,78 +71,47 @@
         .header h1 { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.25rem; font-weight: 700; }
         .header p { color: var(--text-muted); font-size: 0.9rem; }
         
-        /* Kategoriler */
+        /* Ana Kategoriler */
         .category-group { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 0.8rem; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.04); transition: border-color 0.3s, background-color 0.3s; }
-        
-        /* Kategori Başlığı */
-        .category-header { 
-            padding: 1rem 1.2rem; 
-            background-color: var(--card-bg); 
-            cursor: pointer; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            color: var(--text-main); 
-            transition: all 0.2s ease;
-            gap: 10px; 
-        }
+        .category-header { padding: 1rem 1.2rem; background-color: var(--card-bg); cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-main); transition: all 0.2s ease; gap: 10px; }
         .category-header:hover { background-color: var(--hover-bg); }
         .category-header.active { background-color: var(--active-bg); border-bottom: 1px solid var(--border-color); }
-        
-        .category-title {
-            font-size: 0.95rem; 
-            font-weight: 600;
-            line-height: 1.3;
-            flex: 1; 
-            transition: color 0.3s;
-        }
+        .category-title { font-size: 0.95rem; font-weight: 600; line-height: 1.3; flex: 1; transition: color 0.3s; }
 
-        /* Sağ Taraf - Asla Alt Satıra Kaymaz */
-        .header-right { 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; 
-            flex-shrink: 0; 
-            white-space: nowrap; 
-        }
+        .header-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; white-space: nowrap; }
         
-        /* Test Sayısı Rozeti */
-        .test-count { 
-            font-size: 0.75rem; 
-            font-weight: 600; 
-            color: var(--badge-text); 
-            background-color: var(--badge-bg); 
-            padding: 3px 8px; 
-            border-radius: 6px; 
-            letter-spacing: 0.3px;
-            transition: all 0.3s;
-        }
+        .test-count { font-size: 0.75rem; font-weight: 600; color: var(--badge-text); background-color: var(--badge-bg); padding: 3px 8px; border-radius: 6px; letter-spacing: 0.3px; transition: all 0.3s; }
         .category-header.active .test-count { background-color: var(--badge-active-bg); color: var(--badge-active-text); }
         
-        /* Boş Kategori Görünümü */
-        .category-group.is-empty .test-count {
-            background-color: transparent;
-            border: 1px solid var(--empty-badge-border);
-            color: var(--text-muted);
-        }
-        .category-group.is-empty .category-title {
-            color: var(--text-muted);
-            font-weight: 500;
-        }
+        .category-group.is-empty .test-count { background-color: transparent; border: 1px solid var(--empty-badge-border); color: var(--text-muted); }
+        .category-group.is-empty .category-title { color: var(--text-muted); font-weight: 500; }
 
-        /* Ok İşareti */
         .toggle-arrow { font-size: 0.8rem; color: var(--text-muted); transition: transform 0.3s ease; }
         .category-header.active .toggle-arrow { transform: rotate(180deg); color: var(--primary); }
 
-        /* Test İçerikleri */
         .category-content { display: none; padding: 1.25rem; background-color: var(--content-bg); }
         .category-content.active { display: grid; gap: 0.75rem; }
-        
+
+        /* Alt Kategoriler (Klasörler) */
+        .sub-category-group { border: 1px dashed var(--border-color); border-radius: 8px; overflow: hidden; }
+        .sub-category-header { padding: 0.8rem 1rem; background-color: var(--sub-header-bg); cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; font-weight: 600; color: var(--text-main); transition: all 0.2s; }
+        .sub-category-header:hover { background-color: var(--border-color); }
+        .sub-category-header.active { background-color: var(--active-bg); border-bottom: 1px dashed var(--border-color); }
+        .sub-category-content { display: none; padding: 0.8rem; background-color: var(--content-bg); }
+        .sub-category-content.active { display: grid; gap: 0.5rem; }
+
+        /* Test Kartları (Normal ve Alt Kategori İçi) */
         .quiz-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; text-decoration: none; color: var(--text-main); display: flex; align-items: center; justify-content: space-between; transition: all 0.2s ease; }
         .quiz-card:hover { border-color: var(--primary); box-shadow: 0 4px 6px var(--quiz-hover-shadow); transform: translateY(-1px); }
         .quiz-info h2 { font-size: 0.95rem; margin-bottom: 0.2rem; color: var(--text-main); }
         .quiz-info p { font-size: 0.8rem; color: var(--text-muted); }
         .arrow { color: var(--primary); font-size: 1.2rem; font-weight: bold; }
+
+        /* Alt kategori içindeki test kartları (daha küçük) */
+        .sub-quiz-card { padding: 0.75rem 1rem; }
+        .sub-quiz-card .quiz-info h2 { font-size: 0.85rem; font-weight: 500; }
+        .sub-quiz-card .quiz-info p { font-size: 0.75rem; }
+        .sub-quiz-card .arrow { font-size: 1rem; }
     </style>
 </head>
 <body>
@@ -152,7 +122,6 @@
             <p>Çalışmak istediğiniz modülü seçin</p>
         </div>
 
-        <!-- 1. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
                 <span class="category-title">🏛️ PTT İLE İLGİLİ GENEL MEVZUAT</span>
@@ -163,22 +132,27 @@
             </div>
         </div>
         
-        <!-- 2. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
                 <span class="category-title">📦 POSTA - KARGO - E-POSTA VE REGÜLASYON</span>
                 <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
             </div>
             <div class="category-content">
-                <a href="https://cengizkaya4.github.io/ehkquiz/" class="quiz-card"><div class="quiz-info"><h2>5809 sayılı Elektronik Haberleşme Kanunu</h2><p>(22 Soru)</p></div><div class="arrow">→</div></a>
                 
-                <a href="https://notebooklm.google.com/notebook/d7863a7e-3e3a-475d-af8b-244adb50f8b6/artifact/8d985aaa-29fe-4bb5-8ae7-7e90812b1934" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>5809 sayılı Elektronik Haberleşme Kanunu</h2><p>(50 Soru)</p></div><div class="arrow">→</div></a>
-                
+                <div class="sub-category-group">
+                    <div class="sub-category-header" onclick="toggleCategory(this)">
+                        <span>📁 5809 Sayılı Elektronik Haberleşme Kanunu</span>
+                        <span class="toggle-arrow">▼</span>
+                    </div>
+                    <div class="sub-category-content">
+                        <a href="https://cengizkaya4.github.io/ehkquiz/" class="quiz-card sub-quiz-card"><div class="quiz-info"><h2>5809 sayılı Elektronik Haberleşme Kanunu</h2><p>(22 Soru)</p></div><div class="arrow">→</div></a>
+                        <a href="https://notebooklm.google.com/notebook/d7863a7e-3e3a-475d-af8b-244adb50f8b6/artifact/8d985aaa-29fe-4bb5-8ae7-7e90812b1934" class="quiz-card sub-quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>5809 sayılı Elektronik Haberleşme Kanunu</h2><p>(50 Soru)</p></div><div class="arrow">→</div></a>
+                    </div>
+                </div>
                 <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/41f6b1e2-2fe3-43c7-844a-c65552b74e96?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>Tebligat Kanunu</h2><p>(50 Soru)</p></div><div class="arrow">→</div></a>
             </div>
         </div>
         
-        <!-- 3. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
                 <span class="category-title">💳 PTTBANK / ÖDEME SİSTEMLERİ / FİNANS</span>
@@ -189,15 +163,22 @@
                 
                 <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/e0e9c0a5-8a3a-4133-9363-735ec7bbc12b?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>5549 sayılı Suç Gelirlerinin Aklanmasının Önlenmesi Hakkında Kanun ve İlgili 2 Yönetmelik</h2><p>(40 Soru)</p></div><div class="arrow">→</div></a>
                 
-                <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/d0fe061a-f3b6-4f82-a277-234c6bdde8a4?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>6493 sayılı Ödeme ve Menkul Kıymet Mutabakat Sistemleri, Ödeme Hizmetleri ve Elektronik Para Kuruluşları Hakkında Kanun ve İlgili Yönetmelik</h2><p>(49 Soru)</p></div><div class="arrow">→</div></a>
-                
-                <a href="https://notebooklm.google.com/notebook/1219cf6e-4a1a-4753-87c9-bf586fc406b2/artifact/00f04a51-c321-4d1d-8f75-55fd15fdf880" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>Ödeme ve Menkul Kıymet Mutabakat Sistemleri Kanunu (Sadece Kanun)</h2><p>(50 Soru)</p></div><div class="arrow">→</div></a>
-                
-                <a href="https://notebooklm.google.com/notebook/ed1ef979-8f9d-4886-9edf-b0838e1e46d0/artifact/d04fbff3-0639-463f-8a84-5168ab99c965" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>Ödeme Hizmetleri ve Elektronik Para İhracı ile Ödeme Hizmeti Sağlayıcıları Hakkında Yönetmelik</h2><p>(49 Soru)</p></div><div class="arrow">→</div></a>
-            </div>
+                <div class="sub-category-group">
+                    <div class="sub-category-header" onclick="toggleCategory(this)">
+                        <span>📁 6493 sayılı Ödeme ve Menkul Kıymet Kanunu ve İlgili Yönetmelikler</span>
+                        <span class="toggle-arrow">▼</span>
+                    </div>
+                    <div class="sub-category-content">
+                        <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/d0fe061a-f3b6-4f82-a277-234c6bdde8a4?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" class="quiz-card sub-quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>6493 sayılı Ödeme ve Menkul Kıymet Mutabakat Sistemleri, Ödeme Hizmetleri ve Elektronik Para Kuruluşları Hakkında Kanun ve İlgili Yönetmelik</h2><p>(49 Soru)</p></div><div class="arrow">→</div></a>
+                        
+                        <a href="https://notebooklm.google.com/notebook/1219cf6e-4a1a-4753-87c9-bf586fc406b2/artifact/00f04a51-c321-4d1d-8f75-55fd15fdf880" class="quiz-card sub-quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>Ödeme ve Menkul Kıymet Mutabakat Sistemleri Kanunu (Sadece Kanun)</h2><p>(50 Soru)</p></div><div class="arrow">→</div></a>
+                        
+                        <a href="https://notebooklm.google.com/notebook/ed1ef979-8f9d-4886-9edf-b0838e1e46d0/artifact/d04fbff3-0639-463f-8a84-5168ab99c965" class="quiz-card sub-quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>Ödeme Hizmetleri ve Elektronik Para İhracı ile Ödeme Hizmeti Sağlayıcıları Hakkında Yönetmelik</h2><p>(49 Soru)</p></div><div class="arrow">→</div></a>
+                    </div>
+                </div>
+                </div>
         </div>
         
-        <!-- 4. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
                 <span class="category-title">👥 İNSAN KAYNAKLARI - İSG</span>
@@ -208,7 +189,6 @@
             </div>
         </div>
         
-        <!-- 5. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
                 <span class="category-title">📊 FİNANS - MUHASEBE</span>
@@ -220,7 +200,6 @@
             </div>
         </div>
         
-        <!-- 6. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
                 <span class="category-title">🛒 SATINALMA - DESTEK</span>
@@ -231,7 +210,6 @@
             </div>
         </div>
         
-        <!-- 7. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
                 <span class="category-title">🏗️ YAPI - İŞ YERLERİ</span>
@@ -242,7 +220,6 @@
             </div>
         </div>
         
-        <!-- 8. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
                 <span class="category-title">💻 BİLGİ TEKNOLOJİLERİ VE GÜVENLİĞİ</span>
@@ -253,7 +230,6 @@
             </div>
         </div>
         
-        <!-- 9. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
                 <span class="category-title">⚙️ DİĞER ÖNEMLİ OPERASYONEL ALANLAR</span>
@@ -264,7 +240,6 @@
             </div>
         </div>
         
-        <!-- 10. Kategori -->
         <div class="category-group">
             <div class="category-header" onclick="toggleCategory(this)">
                 <span class="category-title">⚖️ GENEL İLGİLİ MEVZUAT</span>
@@ -279,14 +254,14 @@
     </div>
 
     <script>
-        // Akordeon menü
+        // Akordeon menü (Hem Ana Kategoriler hem de Alt Kategoriler için sorunsuz çalışır)
         function toggleCategory(el) {
             const content = el.nextElementSibling;
             content.classList.toggle('active');
             el.classList.toggle('active');
         }
 
-        // Test sayısını bul ve duruma göre sınıf ekle
+        // Test sayısını bul ve duruma göre sınıf ekle (Alt kategorilerdeki testleri de kapsar)
         document.addEventListener('DOMContentLoaded', () => {
             const groups = document.querySelectorAll('.category-group');
             
@@ -294,6 +269,7 @@
                 const content = group.querySelector('.category-content');
                 const countSpan = group.querySelector('.test-count');
                 
+                // Hem doğrudan eklenen hem de alt klasörlerdeki quiz kartlarını sayar
                 const testCount = content.querySelectorAll('.quiz-card').length;
                 
                 if(testCount > 0) {
