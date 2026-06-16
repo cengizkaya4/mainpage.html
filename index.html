@@ -1,311 +1,404 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ptt UZMAN</title>
-    
-    <!-- iPhone ve Tarayıcı İkonu Tanımlamaları -->
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/cengizkaya4/mainpage.html/refs/heads/main/icon.PNG">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/cengizkaya4/mainpage.html/refs/heads/main/icon.PNG">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="PTT UZMAN">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- iPhone ve Tarayıcı İkonu Tanımlamaları -->
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/cengizkaya4/mainpage.html/refs/heads/main/icon.PNG">
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/cengizkaya4/mainpage.html/refs/heads/main/icon.PNG">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="PTT UZMAN">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--color-background-tertiary);color:var(--color-text-primary);padding:1.5rem 1rem;line-height:1.6}
+.container{max-width:680px;margin:0 auto}
 
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('sw.js');
-        });
-      }
-    </script>
+/* COUNTDOWN */
+.countdown-chip{
+  position:fixed;top:12px;right:12px;z-index:999;
+  background:#111;color:#fff;
+  border-radius:20px;padding:5px 12px;
+  font-size:0.75rem;font-weight:500;
+  display:flex;align-items:center;gap:6px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.25);
+  white-space:nowrap;
+}
+.countdown-chip i{font-size:13px}
 
-    <style>
-        /* AÇIK MOD (Varsayılan Renkler) */
-        :root {
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --content-bg: #fafafa;
-            --primary: #16a34a;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border-color: #e2e8f0;
-            --hover-bg: #f1f5f9;
-            --active-bg: #f0fdf4;
-            --badge-bg: #f1f5f9;
-            --badge-text: #1e293b;
-            --badge-active-bg: #bbf7d0;
-            --badge-active-text: #166534;
-            --quiz-hover-shadow: rgba(22, 163, 74, 0.08);
-            --empty-badge-border: #cbd5e1;
-            --sub-header-bg: #f1f5f9;
-        }
+/* HEADER */
+.header{text-align:center;margin-bottom:1.75rem;padding-top:0.5rem}
+.logo-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:0.25rem}
+.ptt-badge{background:#c8102e;color:#fff;font-size:11px;font-weight:700;letter-spacing:1px;padding:3px 8px;border-radius:4px}
+.header h1{font-size:1.3rem;font-weight:500;margin-bottom:0.2rem}
+.header p{font-size:0.85rem;color:var(--color-text-secondary)}
 
-        /* KOYU MOD */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #0f172a;
-                --card-bg: #1e293b;
-                --content-bg: #0f172a;
-                --primary: #22c55e;
-                --text-main: #f8fafc;
-                --text-muted: #94a3b8;
-                --border-color: #334155;
-                --hover-bg: #334155;
-                --active-bg: #064e3b; 
-                --badge-bg: #334155;
-                --badge-text: #e2e8f0;
-                --badge-active-bg: #065f46;
-                --badge-active-text: #a7f3d0;
-                --quiz-hover-shadow: rgba(34, 197, 94, 0.15);
-                --empty-badge-border: #475569;
-                --sub-header-bg: #1e293b;
-            }
-        }
+/* RANDOM BTN */
+.random-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:0.9rem 1.2rem;margin-bottom:1.5rem;background:#c8102e;color:#fff;border:none;border-radius:var(--border-radius-lg);font-size:0.95rem;font-weight:500;cursor:pointer;transition:background 0.2s,transform 0.1s}
+.random-btn:hover{background:#a50d27}
+.random-btn:active{transform:scale(0.98)}
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: '-apple-system', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; padding: 1.5rem 1rem; transition: background-color 0.3s, color 0.3s; }
-        .container { max-width: 700px; margin: 0 auto; }
-        
-        /* Üst Başlık */
-        .header { text-align: center; margin-bottom: 2rem; }
-        .header h1 { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.25rem; font-weight: 700; }
-        .header p { color: var(--text-muted); font-size: 0.9rem; }
-        
-        /* Ana Kategoriler */
-        .category-group { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 0.8rem; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.04); transition: border-color 0.3s, background-color 0.3s; }
-        .category-header { padding: 1rem 1.2rem; background-color: var(--card-bg); cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-main); transition: all 0.2s ease; gap: 10px; }
-        .category-header:hover { background-color: var(--hover-bg); }
-        .category-header.active { background-color: var(--active-bg); border-bottom: 1px solid var(--border-color); }
-        .category-title { font-size: 0.95rem; font-weight: 600; line-height: 1.3; flex: 1; transition: color 0.3s; }
+/* MODAL */
+.random-modal{display:none;position:relative;margin-bottom:1.25rem;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem;animation:fadeIn 0.2s ease}
+.random-modal.show{display:block}
+.modal-label{font-size:11px;font-weight:500;color:#c8102e;letter-spacing:0.5px;margin-bottom:0.5rem}
+.modal-title{font-size:0.95rem;font-weight:500;margin-bottom:0.25rem}
+.modal-meta{font-size:0.8rem;color:var(--color-text-secondary);margin-bottom:1rem}
+.modal-actions{display:flex;gap:8px}
+.btn-go{flex:1;padding:0.6rem 1rem;background:#c8102e;color:#fff;border:none;border-radius:var(--border-radius-md);font-size:0.85rem;font-weight:500;cursor:pointer}
+.btn-go:hover{background:#a50d27}
+.btn-again{padding:0.6rem 1rem;background:transparent;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:0.85rem;color:var(--color-text-secondary);cursor:pointer}
+.btn-again:hover{background:var(--color-background-secondary)}
+.btn-close{position:absolute;top:10px;right:12px;background:none;border:none;color:var(--color-text-secondary);cursor:pointer;font-size:18px}
 
-        .header-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; white-space: nowrap; }
-        
-        .test-count { font-size: 0.75rem; font-weight: 600; color: var(--badge-text); background-color: var(--badge-bg); padding: 3px 8px; border-radius: 6px; letter-spacing: 0.3px; transition: all 0.3s; }
-        .category-header.active .test-count { background-color: var(--badge-active-bg); color: var(--badge-active-text); }
-        
-        .category-group.is-empty .test-count { background-color: transparent; border: 1px solid var(--empty-badge-border); color: var(--text-muted); }
-        .category-group.is-empty .category-title { color: var(--text-muted); font-weight: 500; }
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem}
+.stat-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem;text-align:center}
+.stat-num{font-size:1.4rem;font-weight:500;color:#c8102e}
+.stat-lbl{font-size:0.75rem;color:var(--color-text-secondary);margin-top:2px}
 
-        .toggle-arrow { font-size: 0.8rem; color: var(--text-muted); transition: transform 0.3s ease; }
-        .category-header.active .toggle-arrow { transform: rotate(180deg); color: var(--primary); }
+/* KATEGORİ GRUBU */
+.category-group{border-radius:var(--border-radius-lg);margin-bottom:0.75rem;overflow:hidden;background:var(--color-background-primary)}
+.category-group.plain{border:0.5px solid var(--color-border-tertiary)}
+.category-group.has-sub{border:2px solid var(--color-text-primary)}
 
-        .category-content { display: none; padding: 1.25rem; background-color: var(--content-bg); }
-        .category-content.active { display: grid; gap: 0.75rem; }
+/* KATEGORİ BAŞLIĞI — ANA BAŞLIK */
+.category-header{padding:0.9rem 1.1rem;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background 0.15s}
+.category-header:hover{background:var(--color-background-secondary)}
+.cat-icon{font-size:18px;color:var(--color-text-secondary);flex-shrink:0}
+.cat-title{
+  font-size:0.95rem;   /* ANA başlık — büyük */
+  font-weight:600;
+  flex:1;line-height:1.3;
+}
+.cat-badge{font-size:0.72rem;font-weight:500;padding:2px 8px;border-radius:20px;flex-shrink:0;white-space:nowrap}
+.cat-badge.has-tests{background:#fde8eb;color:#a50d27}
+.cat-badge.empty{background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary)}
+@media(prefers-color-scheme:dark){.cat-badge.has-tests{background:#4a0a12;color:#f4a0ac}}
+.toggle-icon{font-size:14px;color:var(--color-text-secondary);transition:transform 0.25s;flex-shrink:0}
+.category-header.open .toggle-icon{transform:rotate(180deg)}
 
-        /* Alt Kategoriler (Klasörler) */
-        .sub-category-group { border: 1px dashed var(--border-color); border-radius: 8px; overflow: hidden; }
-        .sub-category-header { padding: 0.8rem 1rem; background-color: var(--sub-header-bg); cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; font-weight: 600; color: var(--text-main); transition: all 0.2s; }
-        .sub-category-header:hover { background-color: var(--border-color); }
-        .sub-category-header.active { background-color: var(--active-bg); border-bottom: 1px dashed var(--border-color); }
-        .sub-category-content { display: none; padding: 0.8rem; background-color: var(--content-bg); }
-        .sub-category-content.active { display: grid; gap: 0.5rem; }
+.category-content{display:none}
+.category-content.open{display:block}
+.content-inner{padding:0.75rem 0.75rem 0.75rem 1rem;border-top:0.5px solid var(--color-border-tertiary)}
+.content-grid{display:grid;gap:0.5rem}
 
-        /* Test Kartları (Normal ve Alt Kategori İçi) */
-        .quiz-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; text-decoration: none; color: var(--text-main); display: flex; align-items: center; justify-content: space-between; transition: all 0.2s ease; }
-        .quiz-card:hover { border-color: var(--primary); box-shadow: 0 4px 6px var(--quiz-hover-shadow); transform: translateY(-1px); }
-        .quiz-info h2 { font-size: 0.95rem; margin-bottom: 0.2rem; color: var(--text-main); }
-        .quiz-info p { font-size: 0.8rem; color: var(--text-muted); }
-        .arrow { color: var(--primary); font-size: 1.2rem; font-weight: bold; }
+/* NORMAL QUIZ KARTI — ALT BAŞLIK */
+.quiz-card{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.6rem 0.8rem;
+  background:var(--color-background-secondary);
+  border:0.5px solid var(--color-border-tertiary);
+  border-radius:var(--border-radius-md);
+  text-decoration:none;color:var(--color-text-primary);
+  transition:border-color 0.15s,background 0.15s;gap:10px;
+  margin-left:1rem;   /* sağa kaydırma */
+}
+.quiz-card:hover{border-color:#c8102e;background:var(--color-background-primary)}
+.quiz-info h2{
+  font-size:0.78rem;   /* ALT başlık — küçük */
+  font-weight:400;
+  margin-bottom:1px;line-height:1.3;
+}
+.quiz-info p{font-size:0.7rem;color:var(--color-text-secondary)}
+.card-arrow{color:#c8102e;font-size:14px;flex-shrink:0}
 
-        /* Alt kategori içindeki test kartları (daha küçük) */
-        .sub-quiz-card { padding: 0.75rem 1rem; }
-        .sub-quiz-card .quiz-info h2 { font-size: 0.85rem; font-weight: 500; }
-        .sub-quiz-card .quiz-info p { font-size: 0.75rem; }
-        .sub-quiz-card .arrow { font-size: 1rem; }
-    </style>
+/* ALT KIRILIM GRUBU */
+.sub-group{
+  margin-left:1rem;
+  border-left:3px solid #c8102e;
+  border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;
+  overflow:hidden;
+}
+.sub-header{
+  padding:0.6rem 0.9rem;cursor:pointer;
+  display:flex;align-items:center;gap:8px;
+  font-size:0.82rem;font-weight:500;
+  background:var(--color-background-secondary);
+  transition:background 0.15s;color:var(--color-text-primary);
+}
+.sub-header:hover{background:var(--color-background-tertiary)}
+.sub-header i{font-size:13px;color:#c8102e;flex-shrink:0}
+.sub-title{flex:1}
+.sub-toggle{font-size:12px;color:var(--color-text-secondary);transition:transform 0.25s}
+.sub-header.open .sub-toggle{transform:rotate(180deg)}
+.sub-content{
+  display:none;
+  padding:0.5rem 0.75rem;
+  border-top:0.5px solid var(--color-border-tertiary);
+  background:var(--color-background-tertiary);
+}
+.sub-content.open{display:grid;gap:0.4rem}
+
+/* Alt kırılım içindeki kartlar: biraz daha içeri */
+.sub-content .quiz-card{
+  margin-left:0.75rem;
+  background:var(--color-background-primary);
+}
+.sub-content .quiz-card:hover{border-color:#c8102e}
+
+.empty-msg{text-align:center;color:var(--color-text-secondary);font-size:0.85rem;padding:1rem 0}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+</style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header">
-            <h1>Uzman Yeterlik Sınavına Hazırlık</h1>
-            <p>Çalışmak istediğiniz modülü seçin</p>
-        </div>
+<!-- COUNTDOWN CHIP -->
+<div class="countdown-chip" id="countdown">
+  <i class="ti ti-calendar-event" aria-hidden="true"></i>
+  <span id="cdText">Hesaplanıyor…</span>
+</div>
 
-        <!-- 1. Kategori -->
-        <div class="category-group">
-            <div class="category-header" onclick="toggleCategory(this)">
-                <span class="category-title">🏛️ PTT İLE İLGİLİ GENEL MEVZUAT</span>
-                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
-            </div>
-            <div class="category-content">
-                <a href="https://cengizkaya4.github.io/6475postahizmetlerikanunu/" class="quiz-card"><div class="quiz-info"><h2>Karma Test 1 - (by Nida)</h2><p>(41 Soru)</p></div><div class="arrow">→</div></a>
-                
-                <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/5aaa89be-c51a-4bdd-afa7-c9c0ef22c606?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>Posta Hizmetleri Kanunu (by Tuğçe)</h2><p>(Test)</p></div><div class="arrow">→</div></a>
-                
-                <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/572d3824-4edd-4c70-8894-83faa351552b?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>4 Sayılı CBK 28. Bölüm (by Tuğçe)</h2><p>(Test)</p></div><div class="arrow">→</div></a>
-                
-                <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/e51cf208-e366-4880-a5aa-4dee6aebda14?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>Posta Hizmetleri Kanunu (Sadece Roma Rakamı) (by Tuğçe)</h2><p>(Test)</p></div><div class="arrow">→</div></a>
-                
-                <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/2f56158c-d721-47a4-a7b4-15829b9bc6f2?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>Esas Sözleşme (by Tuğçe)</h2><p>(Test)</p></div><div class="arrow">→</div></a>
-                
-                <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/abcc7cf0-b3af-4b90-956c-c09c3f8b6fda?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>Yönetim Kurulu İşleyiş Prosedürü (by Tuğçe)</h2><p>(Test)</p></div><div class="arrow">→</div></a>
-            </div>
-        </div>
-        
-        <!-- 2. Kategori -->
-        <div class="category-group">
-            <div class="category-header" onclick="toggleCategory(this)">
-                <span class="category-title">📦 POSTA - KARGO - E-POSTA VE REGÜLASYON</span>
-                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
-            </div>
-            <div class="category-content">
-                
-                <!-- Alt Kategori Başlangıcı -->
-                <div class="sub-category-group">
-                    <div class="sub-category-header" onclick="toggleCategory(this)">
-                        <span>📁 5809 Sayılı Elektronik Haberleşme Kanunu</span>
-                        <span class="toggle-arrow">▼</span>
-                    </div>
-                    <div class="sub-category-content">
-                        <a href="https://cengizkaya4.github.io/ehkquiz/" class="quiz-card sub-quiz-card"><div class="quiz-info"><h2>5809 sayılı Elektronik Haberleşme Kanunu</h2><p>(22 Soru)</p></div><div class="arrow">→</div></a>
-                        <a href="https://notebooklm.google.com/notebook/d7863a7e-3e3a-475d-af8b-244adb50f8b6/artifact/8d985aaa-29fe-4bb5-8ae7-7e90812b1934" class="quiz-card sub-quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>5809 sayılı Elektronik Haberleşme Kanunu</h2><p>(50 Soru)</p></div><div class="arrow">→</div></a>
-                    </div>
-                </div>
-                <!-- Alt Kategori Bitişi -->
+<div class="container">
 
-                <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/41f6b1e2-2fe3-43c7-844a-c65552b74e96?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>Tebligat Kanunu</h2><p>(50 Soru)</p></div><div class="arrow">→</div></a>
-            </div>
-        </div>
-        
-        <!-- 3. Kategori -->
-        <div class="category-group">
-            <div class="category-header" onclick="toggleCategory(this)">
-                <span class="category-title">💳 PTTBANK / ÖDEME SİSTEMLERİ / FİNANS</span>
-                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
-            </div>
-            <div class="category-content">
-                <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/0402c63a-7899-4890-bbe7-d7bd5da744f7?utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>Banka Kartları ve Kredi Kartları Kanunu / Yönetmeliği</h2><p>(50 Soru)</p></div><div class="arrow">→</div></a>
-                
-                <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/e0e9c0a5-8a3a-4133-9363-735ec7bbc12b?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>5549 sayılı Suç Gelirlerinin Aklanmasının Önlenmesi Hakkında Kanun ve İlgili 2 Yönetmelik</h2><p>(40 Soru)</p></div><div class="arrow">→</div></a>
-                
-                <!-- Alt Kategori Başlangıcı -->
-                <div class="sub-category-group">
-                    <div class="sub-category-header" onclick="toggleCategory(this)">
-                        <span>📁 6493 sayılı Ödeme ve Menkul Kıymet Kanunu ve İlgili Yönetmelikler</span>
-                        <span class="toggle-arrow">▼</span>
-                    </div>
-                    <div class="sub-category-content">
-                        <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/d0fe061a-f3b6-4f82-a277-234c6bdde8a4?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" class="quiz-card sub-quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>6493 sayılı Ödeme ve Menkul Kıymet Mutabakat Sistemleri, Ödeme Hizmetleri ve Elektronik Para Kuruluşları Hakkında Kanun ve İlgili Yönetmelik</h2><p>(49 Soru)</p></div><div class="arrow">→</div></a>
-                        
-                        <a href="https://notebooklm.google.com/notebook/1219cf6e-4a1a-4753-87c9-bf586fc406b2/artifact/00f04a51-c321-4d1d-8f75-55fd15fdf880" class="quiz-card sub-quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>Ödeme ve Menkul Kıymet Mutabakat Sistemleri Kanunu (Sadece Kanun)</h2><p>(50 Soru)</p></div><div class="arrow">→</div></a>
-                        
-                        <a href="https://notebooklm.google.com/notebook/ed1ef979-8f9d-4886-9edf-b0838e1e46d0/artifact/d04fbff3-0639-463f-8a84-5168ab99c965" class="quiz-card sub-quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>Ödeme Hizmetleri ve Elektronik Para İhracı ile Ödeme Hizmeti Sağlayıcıları Hakkında Yönetmelik</h2><p>(49 Soru)</p></div><div class="arrow">→</div></a>
-                    </div>
-                </div>
-                <!-- Alt Kategori Bitişi -->
-            </div>
-        </div>
-        
-        <!-- 4. Kategori -->
-        <div class="category-group">
-            <div class="category-header" onclick="toggleCategory(this)">
-                <span class="category-title">👥 İNSAN KAYNAKLARI - İSG</span>
-                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
-            </div>
-            <div class="category-content">
-                <p style="text-align:center;color:var(--text-muted);font-size:0.9rem;">Henüz test eklenmedi.</p>
-            </div>
-        </div>
-        
-        <!-- 5. Kategori -->
-        <div class="category-group">
-            <div class="category-header" onclick="toggleCategory(this)">
-                <span class="category-title">📊 FİNANS - MUHASEBE</span>
-                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
-            </div>
-            <div class="category-content">
-                <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/4d46bb81-81de-4f30-9133-fb136f6f2083?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" class="quiz-card" target="_blank" rel="noopener">
-                <div class="quiz-info"><h2>İdari Hizmet Sözleşmeli Personelin Fazla Çalışma Prosedürü</h2><p>(51 Soru)</p></div><div class="arrow">→</div></a>
-            </div>
-        </div>
-        
-        <!-- 6. Kategori -->
-        <div class="category-group">
-            <div class="category-header" onclick="toggleCategory(this)">
-                <span class="category-title">🛒 SATINALMA - DESTEK</span>
-                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
-            </div>
-            <div class="category-content">
-                <p style="text-align:center;color:var(--text-muted);font-size:0.9rem;">Henüz test eklenmedi.</p>
-            </div>
-        </div>
-        
-        <!-- 7. Kategori -->
-        <div class="category-group">
-            <div class="category-header" onclick="toggleCategory(this)">
-                <span class="category-title">🏗️ YAPI - İŞ YERLERİ</span>
-                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
-            </div>
-            <div class="category-content">
-                <p style="text-align:center;color:var(--text-muted);font-size:0.9rem;">Henüz test eklenmedi.</p>
-            </div>
-        </div>
-        
-        <!-- 8. Kategori -->
-        <div class="category-group">
-            <div class="category-header" onclick="toggleCategory(this)">
-                <span class="category-title">💻 BİLGİ TEKNOLOJİLERİ VE GÜVENLİĞİ</span>
-                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
-            </div>
-            <div class="category-content">
-                <p style="text-align:center;color:var(--text-muted);font-size:0.9rem;">Henüz test eklenmedi.</p>
-            </div>
-        </div>
-        
-        <!-- 9. Kategori -->
-        <div class="category-group">
-            <div class="category-header" onclick="toggleCategory(this)">
-                <span class="category-title">⚙️ DİĞER ÖNEMLİ OPERASYONEL ALANLAR</span>
-                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
-            </div>
-            <div class="category-content">
-                <a href="https://cengizkaya4.github.io/uyum-prosed-rleri-test-01/" class="quiz-card"><div class="quiz-info"><h2>Uyum Birimi Prosedürleri</h2><p>(18 Soru)</p></div><div class="arrow">→</div></a>
-            </div>
-        </div>
-        
-        <!-- 10. Kategori -->
-        <div class="category-group">
-            <div class="category-header" onclick="toggleCategory(this)">
-                <span class="category-title">⚖️ GENEL İLGİLİ MEVZUAT</span>
-                <div class="header-right"><span class="test-count"></span><span class="toggle-arrow">▼</span></div>
-            </div>
-            <div class="category-content">
-                <a href="https://notebooklm.google.com/notebook/eccb268d-8854-44d8-b406-ea95cf30a3fe/artifact/e3b2ff2d-7753-48ba-973d-2b47f733aa31" class="quiz-card" target="_blank" rel="noopener"><div class="quiz-info"><h2>Resmi Yazışmalarda Uygulanacak Usul ve Esaslar Hakkında Yönetmelik</h2><p>(50 Soru)</p></div><div class="arrow">→</div></a>
-                <a href="https://cengizkaya4.github.io/devletarsivhizmetleriyonetmeligi/" class="quiz-card"><div class="quiz-info"><h2>Devlet Arşiv Hizmetleri Hakkında Yönetmelik</h2><p>(45 Soru)</p></div><div class="arrow">→</div></a>
-                <a href="https://cengizkaya4.github.io/genelilgilimevzuat-6331-sayili-isg-kanunu/" class="quiz-card"><div class="quiz-info"><h2>6331 sayılı İş Sağlığı ve Güvenliği Kanunu</h2><p>(25 Soru)</p></div><div class="arrow">→</div></a>
-            </div>
-        </div>
+  <div class="header">
+    <div class="logo-row">
+      <span class="ptt-badge">PTT</span>
+      <span style="font-size:0.8rem;font-weight:500;color:var(--color-text-secondary);letter-spacing:0.5px">UZMAN YETERLİK</span>
     </div>
+    <h1>Sınava Hazırlık Paneli</h1>
+    <p>Çalışmak istediğin modülü seç veya şansını dene</p>
+  </div>
 
-    <script>
-        // Akordeon menü (Hem Ana Kategoriler hem de Alt Kategoriler için sorunsuz çalışır)
-        function toggleCategory(el) {
-            const content = el.nextElementSibling;
-            content.classList.toggle('active');
-            el.classList.toggle('active');
-        }
+  <button class="random-btn" onclick="randomQuiz()">
+    <i class="ti ti-dice-3" aria-hidden="true"></i>
+    Rastgele Quiz Aç
+  </button>
 
-        // Test sayısını bul ve duruma göre sınıf ekle (Alt kategorilerdeki testleri de kapsar)
-        document.addEventListener('DOMContentLoaded', () => {
-            const groups = document.querySelectorAll('.category-group');
-            
-            groups.forEach(group => {
-                const content = group.querySelector('.category-content');
-                const countSpan = group.querySelector('.test-count');
-                
-                // Hem doğrudan eklenen hem de alt klasörlerdeki quiz kartlarını sayar
-                const testCount = content.querySelectorAll('.quiz-card').length;
-                
-                if(testCount > 0) {
-                    countSpan.textContent = `${testCount} Test`;
-                } else {
-                    countSpan.textContent = `Boş`;
-                    group.classList.add('is-empty');
-                }
-            });
-        });
-    </script>
+  <div class="random-modal" id="randomModal">
+    <button class="btn-close" onclick="closeModal()"><i class="ti ti-x"></i></button>
+    <div class="modal-label"><i class="ti ti-bolt" style="font-size:12px;vertical-align:-1px"></i> Rastgele seçildi</div>
+    <div class="modal-title" id="modalTitle">—</div>
+    <div class="modal-meta" id="modalMeta">—</div>
+    <div class="modal-actions">
+      <button class="btn-go" onclick="goToQuiz()">Quize git <i class="ti ti-arrow-right" style="font-size:14px;vertical-align:-1px"></i></button>
+      <button class="btn-again" onclick="randomQuiz()"><i class="ti ti-refresh" style="font-size:14px;vertical-align:-1px"></i> Başka biri</button>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num" id="totalTests">0</div><div class="stat-lbl">Toplam Test</div></div>
+    <div class="stat-card"><div class="stat-num" id="totalQ">0</div><div class="stat-lbl">Toplam Soru</div></div>
+    <div class="stat-card"><div class="stat-num" id="activeCategories">0</div><div class="stat-lbl">Aktif Kategori</div></div>
+  </div>
+
+  <!-- 1 -->
+  <div class="category-group plain">
+    <div class="category-header" onclick="toggleCat(this)">
+      <i class="ti ti-building-bank cat-icon" aria-hidden="true"></i>
+      <span class="cat-title">PTT ile İlgili Genel Mevzuat</span>
+      <span class="cat-badge has-tests">6 Test</span>
+      <i class="ti ti-chevron-down toggle-icon" aria-hidden="true"></i>
+    </div>
+    <div class="category-content">
+      <div class="content-inner"><div class="content-grid">
+        <a href="https://cengizkaya4.github.io/6475postahizmetlerikanunu/" class="quiz-card" target="_blank" rel="noopener" data-title="Karma Test 1 (by Nida)" data-meta="41 Soru · PTT Genel Mevzuat"><div class="quiz-info"><h2>Karma Test 1 <span style="color:var(--color-text-secondary)">(by Nida)</span></h2><p>41 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+        <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/5aaa89be-c51a-4bdd-afa7-c9c0ef22c606" class="quiz-card" target="_blank" rel="noopener" data-title="Posta Hizmetleri Kanunu (by Tuğçe)" data-meta="Test · PTT Genel Mevzuat"><div class="quiz-info"><h2>Posta Hizmetleri Kanunu <span style="color:var(--color-text-secondary)">(by Tuğçe)</span></h2><p>Test</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+        <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/572d3824-4edd-4c70-8894-83faa351552b" class="quiz-card" target="_blank" rel="noopener" data-title="4 Sayılı CBK 28. Bölüm (by Tuğçe)" data-meta="Test · PTT Genel Mevzuat"><div class="quiz-info"><h2>4 Sayılı CBK 28. Bölüm <span style="color:var(--color-text-secondary)">(by Tuğçe)</span></h2><p>Test</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+        <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/e51cf208-e366-4880-a5aa-4dee6aebda14" class="quiz-card" target="_blank" rel="noopener" data-title="Posta Hizmetleri Kanunu — Sadece Roma Rakamı" data-meta="Test · PTT Genel Mevzuat"><div class="quiz-info"><h2>Posta Hizmetleri Kanunu — Sadece Roma Rakamı <span style="color:var(--color-text-secondary)">(by Tuğçe)</span></h2><p>Test</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+        <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/2f56158c-d721-47a4-a7b4-15829b9bc6f2" class="quiz-card" target="_blank" rel="noopener" data-title="Esas Sözleşme (by Tuğçe)" data-meta="Test · PTT Genel Mevzuat"><div class="quiz-info"><h2>Esas Sözleşme <span style="color:var(--color-text-secondary)">(by Tuğçe)</span></h2><p>Test</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+        <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/abcc7cf0-b3af-4b90-956c-c09c3f8b6fda" class="quiz-card" target="_blank" rel="noopener" data-title="Yönetim Kurulu İşleyiş Prosedürü (by Tuğçe)" data-meta="Test · PTT Genel Mevzuat"><div class="quiz-info"><h2>Yönetim Kurulu İşleyiş Prosedürü <span style="color:var(--color-text-secondary)">(by Tuğçe)</span></h2><p>Test</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="category-group has-sub">
+    <div class="category-header" onclick="toggleCat(this)">
+      <i class="ti ti-package cat-icon" aria-hidden="true"></i>
+      <span class="cat-title">Posta · Kargo · E-Posta ve Regülasyon</span>
+      <span class="cat-badge has-tests">3 Test</span>
+      <i class="ti ti-chevron-down toggle-icon" aria-hidden="true"></i>
+    </div>
+    <div class="category-content">
+      <div class="content-inner"><div class="content-grid">
+        <div class="sub-group">
+          <div class="sub-header" onclick="toggleSub(this)">
+            <i class="ti ti-folder" aria-hidden="true"></i>
+            <span class="sub-title">5809 Sayılı Elektronik Haberleşme Kanunu</span>
+            <i class="ti ti-chevron-down sub-toggle" aria-hidden="true"></i>
+          </div>
+          <div class="sub-content">
+            <a href="https://cengizkaya4.github.io/ehkquiz/" class="quiz-card" target="_blank" rel="noopener" data-title="5809 Sayılı EHK (22 Soru)" data-meta="22 Soru · Posta & Kargo"><div class="quiz-info"><h2>5809 sayılı Elektronik Haberleşme Kanunu</h2><p>22 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+            <a href="https://notebooklm.google.com/notebook/d7863a7e-3e3a-475d-af8b-244adb50f8b6/artifact/8d985aaa-29fe-4bb5-8ae7-7e90812b1934" class="quiz-card" target="_blank" rel="noopener" data-title="5809 Sayılı EHK (50 Soru)" data-meta="50 Soru · Posta & Kargo"><div class="quiz-info"><h2>5809 sayılı Elektronik Haberleşme Kanunu</h2><p>50 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/41f6b1e2-2fe3-43c7-844a-c65552b74e96" class="quiz-card" target="_blank" rel="noopener" data-title="Tebligat Kanunu" data-meta="50 Soru · Posta & Kargo"><div class="quiz-info"><h2>Tebligat Kanunu</h2><p>50 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="category-group has-sub">
+    <div class="category-header" onclick="toggleCat(this)">
+      <i class="ti ti-credit-card cat-icon" aria-hidden="true"></i>
+      <span class="cat-title">PTTBank / Ödeme Sistemleri / Finans</span>
+      <span class="cat-badge has-tests">5 Test</span>
+      <i class="ti ti-chevron-down toggle-icon" aria-hidden="true"></i>
+    </div>
+    <div class="category-content">
+      <div class="content-inner"><div class="content-grid">
+        <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/0402c63a-7899-4890-bbe7-d7bd5da744f7" class="quiz-card" target="_blank" rel="noopener" data-title="Banka Kartları ve Kredi Kartları Kanunu" data-meta="50 Soru · PTTBank & Ödeme"><div class="quiz-info"><h2>Banka Kartları ve Kredi Kartları Kanunu / Yönetmeliği</h2><p>50 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+        <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/e0e9c0a5-8a3a-4133-9363-735ec7bbc12b" class="quiz-card" target="_blank" rel="noopener" data-title="5549 sayılı Suç Gelirlerinin Aklanması" data-meta="40 Soru · PTTBank & Ödeme"><div class="quiz-info"><h2>5549 sayılı Suç Gelirlerinin Aklanmasının Önlenmesi</h2><p>40 Soru · Kanun + 2 Yönetmelik</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+        <div class="sub-group">
+          <div class="sub-header" onclick="toggleSub(this)">
+            <i class="ti ti-folder" aria-hidden="true"></i>
+            <span class="sub-title">6493 Sayılı Ödeme ve Menkul Kıymet Kanunu ve İlgili Yönetmelikler</span>
+            <i class="ti ti-chevron-down sub-toggle" aria-hidden="true"></i>
+          </div>
+          <div class="sub-content">
+            <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/d0fe061a-f3b6-4f82-a277-234c6bdde8a4" class="quiz-card" target="_blank" rel="noopener" data-title="6493 sayılı Kanun + Yönetmelik" data-meta="49 Soru · PTTBank & Ödeme"><div class="quiz-info"><h2>6493 sayılı Kanun ve Yönetmelik</h2><p>49 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+            <a href="https://notebooklm.google.com/notebook/1219cf6e-4a1a-4753-87c9-bf586fc406b2/artifact/00f04a51-c321-4d1d-8f75-55fd15fdf880" class="quiz-card" target="_blank" rel="noopener" data-title="Ödeme ve Menkul Kıymet Mutabakat Kanunu (Sadece Kanun)" data-meta="50 Soru · PTTBank & Ödeme"><div class="quiz-info"><h2>Ödeme ve Menkul Kıymet Mutabakat Kanunu (Sadece Kanun)</h2><p>50 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+            <a href="https://notebooklm.google.com/notebook/ed1ef979-8f9d-4886-9edf-b0838e1e46d0/artifact/d04fbff3-0639-463f-8a84-5168ab99c965" class="quiz-card" target="_blank" rel="noopener" data-title="Ödeme Hizmetleri ve E-Para İhracı Yönetmeliği" data-meta="49 Soru · PTTBank & Ödeme"><div class="quiz-info"><h2>Ödeme Hizmetleri ve E-Para İhracı Yönetmeliği</h2><p>49 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="category-group plain">
+    <div class="category-header" onclick="toggleCat(this)">
+      <i class="ti ti-users cat-icon" aria-hidden="true"></i>
+      <span class="cat-title">İnsan Kaynakları · İSG</span>
+      <span class="cat-badge empty">Boş</span>
+      <i class="ti ti-chevron-down toggle-icon" aria-hidden="true"></i>
+    </div>
+    <div class="category-content">
+      <div class="content-inner"><p class="empty-msg"><i class="ti ti-clock" style="vertical-align:-2px"></i> Henüz test eklenmedi</p></div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="category-group plain">
+    <div class="category-header" onclick="toggleCat(this)">
+      <i class="ti ti-chart-bar cat-icon" aria-hidden="true"></i>
+      <span class="cat-title">Finans · Muhasebe</span>
+      <span class="cat-badge has-tests">1 Test</span>
+      <i class="ti ti-chevron-down toggle-icon" aria-hidden="true"></i>
+    </div>
+    <div class="category-content">
+      <div class="content-inner"><div class="content-grid">
+        <a href="https://notebooklm.google.com/notebook/80f4096b-65f6-48fd-abb0-f4ff6aafe557/artifact/4d46bb81-81de-4f30-9133-fb136f6f2083" class="quiz-card" target="_blank" rel="noopener" data-title="Fazla Çalışma Prosedürü" data-meta="51 Soru · Finans & Muhasebe"><div class="quiz-info"><h2>İdari Hizmet Sözleşmeli Personelin Fazla Çalışma Prosedürü</h2><p>51 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="category-group plain">
+    <div class="category-header" onclick="toggleCat(this)">
+      <i class="ti ti-shopping-cart cat-icon" aria-hidden="true"></i>
+      <span class="cat-title">Satınalma · Destek</span>
+      <span class="cat-badge empty">Boş</span>
+      <i class="ti ti-chevron-down toggle-icon" aria-hidden="true"></i>
+    </div>
+    <div class="category-content">
+      <div class="content-inner"><p class="empty-msg"><i class="ti ti-clock" style="vertical-align:-2px"></i> Henüz test eklenmedi</p></div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="category-group plain">
+    <div class="category-header" onclick="toggleCat(this)">
+      <i class="ti ti-building cat-icon" aria-hidden="true"></i>
+      <span class="cat-title">Yapı · İş Yerleri</span>
+      <span class="cat-badge empty">Boş</span>
+      <i class="ti ti-chevron-down toggle-icon" aria-hidden="true"></i>
+    </div>
+    <div class="category-content">
+      <div class="content-inner"><p class="empty-msg"><i class="ti ti-clock" style="vertical-align:-2px"></i> Henüz test eklenmedi</p></div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="category-group plain">
+    <div class="category-header" onclick="toggleCat(this)">
+      <i class="ti ti-device-laptop cat-icon" aria-hidden="true"></i>
+      <span class="cat-title">Bilgi Teknolojileri ve Güvenliği</span>
+      <span class="cat-badge empty">Boş</span>
+      <i class="ti ti-chevron-down toggle-icon" aria-hidden="true"></i>
+    </div>
+    <div class="category-content">
+      <div class="content-inner"><p class="empty-msg"><i class="ti ti-clock" style="vertical-align:-2px"></i> Henüz test eklenmedi</p></div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="category-group plain">
+    <div class="category-header" onclick="toggleCat(this)">
+      <i class="ti ti-settings cat-icon" aria-hidden="true"></i>
+      <span class="cat-title">Diğer Önemli Operasyonel Alanlar</span>
+      <span class="cat-badge has-tests">1 Test</span>
+      <i class="ti ti-chevron-down toggle-icon" aria-hidden="true"></i>
+    </div>
+    <div class="category-content">
+      <div class="content-inner"><div class="content-grid">
+        <a href="https://cengizkaya4.github.io/uyum-prosed-rleri-test-01/" class="quiz-card" target="_blank" rel="noopener" data-title="Uyum Birimi Prosedürleri" data-meta="18 Soru · Operasyonel"><div class="quiz-info"><h2>Uyum Birimi Prosedürleri</h2><p>18 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="category-group plain">
+    <div class="category-header" onclick="toggleCat(this)">
+      <i class="ti ti-scale cat-icon" aria-hidden="true"></i>
+      <span class="cat-title">Genel İlgili Mevzuat</span>
+      <span class="cat-badge has-tests">3 Test</span>
+      <i class="ti ti-chevron-down toggle-icon" aria-hidden="true"></i>
+    </div>
+    <div class="category-content">
+      <div class="content-inner"><div class="content-grid">
+        <a href="https://notebooklm.google.com/notebook/eccb268d-8854-44d8-b406-ea95cf30a3fe/artifact/e3b2ff2d-7753-48ba-973d-2b47f733aa31" class="quiz-card" target="_blank" rel="noopener" data-title="Resmi Yazışmalar Yönetmeliği" data-meta="50 Soru · Genel Mevzuat"><div class="quiz-info"><h2>Resmi Yazışmalarda Uygulanacak Usul ve Esaslar Yönetmeliği</h2><p>50 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+        <a href="https://cengizkaya4.github.io/devletarsivhizmetleriyonetmeligi/" class="quiz-card" target="_blank" rel="noopener" data-title="Devlet Arşiv Hizmetleri Yönetmeliği" data-meta="45 Soru · Genel Mevzuat"><div class="quiz-info"><h2>Devlet Arşiv Hizmetleri Hakkında Yönetmelik</h2><p>45 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+        <a href="https://cengizkaya4.github.io/genelilgilimevzuat-6331-sayili-isg-kanunu/" class="quiz-card" target="_blank" rel="noopener" data-title="6331 sayılı İSG Kanunu" data-meta="25 Soru · Genel Mevzuat"><div class="quiz-info"><h2>6331 sayılı İş Sağlığı ve Güvenliği Kanunu</h2><p>25 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+      </div></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleCat(el){el.classList.toggle('open');el.nextElementSibling.classList.toggle('open')}
+function toggleSub(el){el.classList.toggle('open');el.nextElementSibling.classList.toggle('open')}
+
+const allCards=()=>Array.from(document.querySelectorAll('.quiz-card[data-title]'));
+let currentUrl='';
+function randomQuiz(){
+  const cards=allCards();
+  const pick=cards[Math.floor(Math.random()*cards.length)];
+  currentUrl=pick.href;
+  document.getElementById('modalTitle').textContent=pick.dataset.title;
+  document.getElementById('modalMeta').textContent=pick.dataset.meta;
+  const modal=document.getElementById('randomModal');
+  modal.classList.add('show');
+  modal.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function goToQuiz(){window.open(currentUrl,'_blank','noopener')}
+function closeModal(){document.getElementById('randomModal').classList.remove('show')}
+
+/* COUNTDOWN */
+function updateCountdown(){
+  const target=new Date('2026-08-29T09:00:00');
+  const now=new Date();
+  const diff=target-now;
+  const el=document.getElementById('cdText');
+  if(diff<=0){el.textContent='Sınav günü!';return}
+  const days=Math.floor(diff/(1000*60*60*24));
+  const hrs=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  if(days>0) el.textContent=days+' gün '+hrs+' saat kaldı';
+  else el.textContent=hrs+' saat kaldı';
+}
+updateCountdown();
+setInterval(updateCountdown,60000);
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const cards=allCards();
+  document.getElementById('totalTests').textContent=cards.length;
+  const total=cards.reduce((a,c)=>{const m=c.dataset.meta&&c.dataset.meta.match(/(\d+)\s*Soru/);return a+(m?+m[1]:0)},0);
+  document.getElementById('totalQ').textContent=total>0?total+'+':cards.length*30+'+';
+  document.getElementById('activeCategories').textContent=document.querySelectorAll('.cat-badge.has-tests').length;
+});
+</script>
 </body>
 </html>
