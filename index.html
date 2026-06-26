@@ -409,11 +409,30 @@ updateCountdown();
 setInterval(updateCountdown,60000);
 
 document.addEventListener('DOMContentLoaded',()=>{
+  // Toplam test ve soru sayısı
   const cards=allCards();
   document.getElementById('totalTests').textContent=cards.length;
   const total=cards.reduce((a,c)=>{const m=c.dataset.meta&&c.dataset.meta.match(/(\d+)\s*Soru/);return a+(m?+m[1]:0)},0);
   document.getElementById('totalQ').textContent=total>0?total+'+':cards.length*30+'+';
-  document.getElementById('activeCategories').textContent=document.querySelectorAll('.cat-badge.has-tests').length;
+
+  // Her kategori için rozeti otomatik hesapla
+  document.querySelectorAll('.category-group').forEach(group=>{
+    const badge=group.querySelector('.cat-badge');
+    if(!badge) return;
+    const count=group.querySelectorAll('.quiz-card[data-title]').length;
+    if(count>0){
+      badge.textContent=count+' Test';
+      badge.className='cat-badge has-tests';
+      group.classList.remove('is-empty');
+    } else {
+      badge.textContent='Boş';
+      badge.className='cat-badge empty';
+    }
+  });
+
+  // Aktif kategori sayısı
+  document.getElementById('activeCategories').textContent=
+    document.querySelectorAll('.cat-badge.has-tests').length;
 });
 </script>
 </body>
