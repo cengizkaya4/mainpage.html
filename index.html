@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- iPhone ve Tarayıcı İkonu Tanımlamaları -->
-<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/cengizkaya4/the-simulation-theory/main/panelikon.png">
-<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/cengizkaya4/the-simulation-theory/main/panelikon.png">
+<link rel="icon" type="image/png" href="./panelikon.png">
+<link rel="apple-touch-icon" href="./panelikon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="PTT UZMAN">
@@ -395,7 +395,7 @@ function closeModal(){document.getElementById('randomModal').classList.remove('s
 
 /* COUNTDOWN */
 function updateCountdown(){
-  const target=new Date('2026-08-29T09:00:00');
+  const target=new Date('2026-08-29T09:00:00+03:00');
   const now=new Date();
   const diff=target-now;
   const el=document.getElementById('cdText');
@@ -407,6 +407,13 @@ function updateCountdown(){
 }
 updateCountdown();
 setInterval(updateCountdown,60000);
+
+/* SERVICE WORKER KAYDI (offline / PWA) */
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
+}
 
 document.addEventListener('DOMContentLoaded',()=>{
   // Toplam test ve soru sayısı
