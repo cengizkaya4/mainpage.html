@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- iPhone ve Tarayıcı İkonu Tanımlamaları -->
-<link rel="icon" type="image/png" href="./panelikon.png">
-<link rel="apple-touch-icon" href="./panelikon.png">
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/cengizkaya4/the-simulation-theory/main/panelikon.png">
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/cengizkaya4/the-simulation-theory/main/panelikon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="PTT UZMAN">
@@ -142,112 +142,9 @@ body{font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--col
 
 .empty-msg{text-align:center;color:var(--color-text-secondary);font-size:0.85rem;padding:1rem 0}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-
-/* === DESIGN TOKENS / TEMA === */
-:root{
-  --color-background-primary:#ffffff;
-  --color-background-secondary:#f1f1f4;
-  --color-background-tertiary:#f8f8fa;
-  --color-text-primary:#1c1c1e;
-  --color-text-secondary:#6b6b70;
-  --color-border-tertiary:#e5e5ea;
-  --color-border-secondary:#d1d1d6;
-  --border-radius-lg:14px;
-  --border-radius-md:10px;
-}
-:root[data-theme="dark"]{
-  --color-background-primary:#1c1c1e;
-  --color-background-secondary:#2c2c2e;
-  --color-background-tertiary:#000000;
-  --color-text-primary:#f5f5f7;
-  --color-text-secondary:#9a9aa0;
-  --color-border-tertiary:#38383a;
-  --color-border-secondary:#48484a;
-}
-@media(prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --color-background-primary:#1c1c1e;
-    --color-background-secondary:#2c2c2e;
-    --color-background-tertiary:#000000;
-    --color-text-primary:#f5f5f7;
-    --color-text-secondary:#9a9aa0;
-    --color-border-tertiary:#38383a;
-    --color-border-secondary:#48484a;
-  }
-}
-:root[data-theme="dark"] .cat-badge.has-tests{background:#4a0a12;color:#f4a0ac}
-
-/* === TEMA DÜĞMESİ === */
-.theme-toggle{
-  position:fixed;top:12px;left:12px;z-index:999;
-  width:34px;height:34px;border-radius:50%;
-  background:#111;color:#fff;border:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  font-size:16px;box-shadow:0 2px 8px rgba(0,0,0,0.25);
-}
-
-/* === ARAMA === */
-.search-wrap{position:relative;margin-bottom:1.25rem}
-.search-wrap > i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--color-text-secondary);font-size:16px;pointer-events:none}
-.search-input{
-  width:100%;padding:0.8rem 2.4rem;
-  background:var(--color-background-primary);
-  border:0.5px solid var(--color-border-secondary);
-  border-radius:var(--border-radius-lg);
-  color:var(--color-text-primary);font-size:0.9rem;
-  font-family:inherit;
-}
-.search-input:focus{outline:none;border-color:#c8102e}
-.search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--color-text-secondary);cursor:pointer;font-size:16px;display:none}
-.search-wrap.has-text .search-clear{display:block}
-.no-results{text-align:center;color:var(--color-text-secondary);font-size:0.9rem;padding:1.5rem 0;display:none}
-
-/* === İLERLEME === */
-.progress-card{
-  background:var(--color-background-secondary);
-  border-radius:var(--border-radius-lg);
-  padding:0.9rem 1rem;margin-bottom:1.5rem;
-}
-.progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}
-.progress-top span{font-size:0.85rem;font-weight:500}
-.progress-pct{color:#c8102e;font-weight:600}
-.progress-bar{height:8px;border-radius:8px;background:var(--color-border-tertiary);overflow:hidden}
-.progress-fill{height:100%;width:0;background:#c8102e;border-radius:8px;transition:width 0.35s ease}
-.progress-text{font-size:0.78rem;color:var(--color-text-secondary);display:block;margin-top:0.5rem}
-.progress-reset{background:none;border:none;color:var(--color-text-secondary);font-size:0.72rem;cursor:pointer;text-decoration:underline;margin-top:0.35rem;padding:0}
-
-/* === TÜMÜNÜ AÇ/KAPAT === */
-.controls-row{display:flex;justify-content:flex-end;margin-bottom:0.6rem}
-.expand-all-btn{
-  display:flex;align-items:center;gap:5px;
-  background:none;border:0.5px solid var(--color-border-secondary);
-  border-radius:20px;padding:5px 12px;font-size:0.75rem;
-  color:var(--color-text-secondary);cursor:pointer;font-family:inherit;
-}
-.expand-all-btn:hover{border-color:#c8102e;color:#c8102e}
-
-/* === TEST TAMAMLAMA === */
-.quiz-info{flex:1;min-width:0}
-.done-toggle{
-  flex-shrink:0;width:22px;height:22px;border-radius:50%;
-  border:1.5px solid var(--color-border-secondary);
-  background:var(--color-background-primary);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;color:transparent;font-size:13px;transition:all 0.15s;padding:0;
-}
-.done-toggle:hover{border-color:#16a34a}
-.quiz-card.done .done-toggle{background:#16a34a;border-color:#16a34a;color:#fff}
-.quiz-card.done .quiz-info h2{text-decoration:line-through;color:var(--color-text-secondary)}
-.quiz-card.done{opacity:0.65}
 </style>
 </head>
 <body>
-<script>(function(){var t=localStorage.getItem('ptt-theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
-
-<!-- TEMA DÜĞMESİ -->
-<button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Tema değiştir">
-  <i class="ti ti-moon" aria-hidden="true"></i>
-</button>
 
 <!-- COUNTDOWN CHIP -->
 <div class="countdown-chip" id="countdown">
@@ -266,12 +163,6 @@ body{font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--col
     <p>Çalışmak istediğin modülü seç veya şansını dene</p>
   </div>
 
-  <div class="search-wrap" id="searchWrap">
-    <i class="ti ti-search" aria-hidden="true"></i>
-    <input type="text" class="search-input" id="searchInput" placeholder="Test ara… (ör. havale, tebligat, 5809)" oninput="filterQuizzes(this.value)" autocomplete="off">
-    <button class="search-clear" onclick="clearSearch()" aria-label="Aramayı temizle"><i class="ti ti-x" aria-hidden="true"></i></button>
-  </div>
-
   <button class="random-btn" onclick="randomQuiz()">
     <i class="ti ti-dice-3" aria-hidden="true"></i>
     Rastgele Quiz Aç
@@ -288,29 +179,11 @@ body{font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--col
     </div>
   </div>
 
-  <div class="progress-card">
-    <div class="progress-top">
-      <span>Çalışma ilerlemen</span>
-      <span class="progress-pct" id="progressPct">0%</span>
-    </div>
-    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-    <span class="progress-text" id="progressText">0 / 0 test tamamlandı</span>
-    <button class="progress-reset" onclick="resetProgress()">Sıfırla</button>
-  </div>
-
   <div class="stats-row">
     <div class="stat-card"><div class="stat-num" id="totalTests">0</div><div class="stat-lbl">Toplam Test</div></div>
     <div class="stat-card"><div class="stat-num" id="totalQ">0</div><div class="stat-lbl">Toplam Soru</div></div>
     <div class="stat-card"><div class="stat-num" id="activeCategories">0</div><div class="stat-lbl">Aktif Kategori</div></div>
   </div>
-
-  <div class="controls-row">
-    <button class="expand-all-btn" id="expandAllBtn" onclick="toggleExpandAll()">
-      <i class="ti ti-arrows-maximize" aria-hidden="true"></i><span>Tümünü aç</span>
-    </button>
-  </div>
-
-  <p class="no-results" id="noResults"><i class="ti ti-mood-empty" style="vertical-align:-2px"></i> Aramanla eşleşen test bulunamadı</p>
 
   <!-- 1 -->
   <div class="category-group plain">
@@ -357,6 +230,10 @@ body{font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--col
         <a href="https://cengizkaya4.github.io/postamevzuatinida" class="quiz-card" target="_blank" rel="noopener" data-title="Posta- İşletme-AyrımSevk-YurtDışıSevk-Yetkilendirme Prosedürleri (by Nida)" data-meta="30 Soru · Posta & Kargo"><div class="quiz-info"><h2>Posta İşletme · Ayrım Sevk · Yurt Dışı Sevk · Yetkilendirme Prosedürleri <span style="color:var(--color-text-secondary)">(by Nida)</span></h2><p>30 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
         <a href="https://cengizkaya4.github.io/Nida-UETS-Mevzuat-/" class="quiz-card" target="_blank" rel="noopener" data-title="UETS Mevzuat Testi (by Nida)" data-meta="28 Soru · Posta & Kargo"><div class="quiz-info"><h2>UETS Mevzuat Testi <span style="color:var(--color-text-secondary)">(by Nida)</span></h2><p>28 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
         <a href="https://cengizkaya4.github.io/ElektronikHaberlesmeVeTebligat/" class="quiz-card" target="_blank" rel="noopener" data-title="Elektronik Haberleşme ve Tebligat Mevzuatı (by Nida)" data-meta="31 Soru · Posta & Kargo"><div class="quiz-info"><h2>Elektronik Haberleşme ve Tebligat Mevzuatı <span style="color:var(--color-text-secondary)">(by Nida)</span></h2><p>31 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+        <a href="https://cengizkaya4.github.io/PTT_Elektronik_Posta_Tebligat_Sinavi.html/" class="quiz-card" target="_blank" rel="noopener" data-title="Elektronik Posta ve Tebligat Mevzuat Sınavı — UETS+KEP (by Nida)" data-meta="41 Soru · Posta & Kargo"><div class="quiz-info"><h2>Elektronik Posta ve Tebligat Mevzuat Sınavı (UETS + KEP) <span style="color:var(--color-text-secondary)">(by Nida)</span></h2><p>41 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+        <a href="https://cengizkaya4.github.io/Posta_Sektoru_Sunum_ve_Yaptirimlar_Testi.html/" class="quiz-card" target="_blank" rel="noopener" data-title="Posta Sektörü Sunum ve İdari Yaptırımlar Testi — YNT.067+YNT.068 (by Nida)" data-meta="35 Soru · Posta & Kargo"><div class="quiz-info"><h2>Posta Sektörü: Sunum ve İdari Yaptırımlar Testi <span style="color:var(--color-text-secondary)">(by Nida)</span></h2><p>35 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+        <a href="https://cengizkaya4.github.io/Kisisel_Veri_Gizlilik_Testi.html-/" class="quiz-card" target="_blank" rel="noopener" data-title="Kişisel Veri ve Gizlilik Testi — YNT.072 (by Nida)" data-meta="20 Soru · Posta & Kargo"><div class="quiz-info"><h2>Elektronik Haberleşmede Kişisel Veri ve Gizlilik Testi <span style="color:var(--color-text-secondary)">(by Nida)</span></h2><p>20 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
+        <a href="https://cengizkaya4.github.io/Evrensel_Posta_Hizmetleri_Testi.html/" class="quiz-card" target="_blank" rel="noopener" data-title="Evrensel Posta Hizmetleri Testi — YNT.078 (by Nida)" data-meta="22 Soru · Posta & Kargo"><div class="quiz-info"><h2>Evrensel Posta Hizmetleri Testi <span style="color:var(--color-text-secondary)">(by Nida)</span></h2><p>22 Soru</p></div><i class="ti ti-external-link card-arrow" aria-hidden="true"></i></a>
       </div></div>
     </div>
   </div>
@@ -522,7 +399,7 @@ function closeModal(){document.getElementById('randomModal').classList.remove('s
 
 /* COUNTDOWN */
 function updateCountdown(){
-  const target=new Date('2026-08-29T09:00:00+03:00');
+  const target=new Date('2026-08-29T09:00:00');
   const now=new Date();
   const diff=target-now;
   const el=document.getElementById('cdText');
@@ -534,13 +411,6 @@ function updateCountdown(){
 }
 updateCountdown();
 setInterval(updateCountdown,60000);
-
-/* SERVICE WORKER KAYDI (offline / PWA) */
-if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('sw.js').catch(()=>{});
-  });
-}
 
 document.addEventListener('DOMContentLoaded',()=>{
   // Toplam test ve soru sayısı
@@ -567,124 +437,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   // Aktif kategori sayısı
   document.getElementById('activeCategories').textContent=
     document.querySelectorAll('.cat-badge.has-tests').length;
-
-  // Yeni özellikleri başlat
-  initCompletion();
-  applyThemeIcon();
 });
-
-/* === TEMA === */
-function isDarkActive(){
-  const t=document.documentElement.getAttribute('data-theme');
-  if(t) return t==='dark';
-  return window.matchMedia('(prefers-color-scheme:dark)').matches;
-}
-function applyThemeIcon(){
-  const i=document.querySelector('#themeToggle i');
-  if(i) i.className=isDarkActive()?'ti ti-sun':'ti ti-moon';
-}
-function toggleTheme(){
-  const next=isDarkActive()?'light':'dark';
-  document.documentElement.setAttribute('data-theme',next);
-  localStorage.setItem('ptt-theme',next);
-  applyThemeIcon();
-}
-
-/* === ARAMA === */
-function filterQuizzes(q){
-  q=(q||'').trim().toLowerCase();
-  const searching=q.length>0;
-  document.getElementById('searchWrap').classList.toggle('has-text',searching);
-  allCards().forEach(c=>{
-    const hay=((c.dataset.title||'')+' '+(c.dataset.meta||'')).toLowerCase();
-    c.style.display=(!searching||hay.includes(q))?'':'none';
-  });
-  let anyVisible=false;
-  document.querySelectorAll('.category-group').forEach(group=>{
-    const cards=group.querySelectorAll('.quiz-card[data-title]');
-    const vis=Array.from(cards).some(c=>c.style.display!=='none');
-    group.style.display=(!searching||vis)?'':'none';
-    if(vis) anyVisible=true;
-    if(searching){
-      group.querySelector('.category-header').classList.toggle('open',vis);
-      group.querySelector('.category-content').classList.toggle('open',vis);
-    }
-    group.querySelectorAll('.sub-group').forEach(sg=>{
-      const svis=Array.from(sg.querySelectorAll('.quiz-card[data-title]')).some(c=>c.style.display!=='none');
-      sg.style.display=(!searching||svis)?'':'none';
-      if(searching){
-        sg.querySelector('.sub-header').classList.toggle('open',svis);
-        sg.querySelector('.sub-content').classList.toggle('open',svis);
-      }
-    });
-  });
-  document.getElementById('noResults').style.display=(searching&&!anyVisible)?'block':'none';
-  if(!searching){
-    document.querySelectorAll('.open').forEach(el=>el.classList.remove('open'));
-    isAllExpanded=false;updateExpandLabel();
-  }
-}
-function clearSearch(){
-  const i=document.getElementById('searchInput');
-  i.value='';filterQuizzes('');i.focus();
-}
-
-/* === TÜMÜNÜ AÇ / KAPAT === */
-let isAllExpanded=false;
-function toggleExpandAll(){
-  isAllExpanded=!isAllExpanded;
-  document.querySelectorAll('.category-header').forEach(h=>h.classList.toggle('open',isAllExpanded));
-  document.querySelectorAll('.category-content').forEach(c=>c.classList.toggle('open',isAllExpanded));
-  updateExpandLabel();
-}
-function updateExpandLabel(){
-  const btn=document.getElementById('expandAllBtn');
-  if(!btn) return;
-  btn.querySelector('span').textContent=isAllExpanded?'Tümünü kapat':'Tümünü aç';
-  btn.querySelector('i').className=isAllExpanded?'ti ti-arrows-minimize':'ti ti-arrows-maximize';
-}
-
-/* === TEST TAMAMLAMA TAKİBİ === */
-const DONE_KEY='ptt-done';
-function getDone(){try{return new Set(JSON.parse(localStorage.getItem(DONE_KEY)||'[]'))}catch(e){return new Set()}}
-function saveDone(set){localStorage.setItem(DONE_KEY,JSON.stringify(Array.from(set)))}
-function initCompletion(){
-  const done=getDone();
-  allCards().forEach(card=>{
-    const key=card.getAttribute('href');
-    if(done.has(key)) card.classList.add('done');
-    const btn=document.createElement('button');
-    btn.type='button';
-    btn.className='done-toggle';
-    btn.title='Tamamlandı olarak işaretle';
-    btn.setAttribute('aria-label','Tamamlandı olarak işaretle');
-    btn.innerHTML='<i class="ti ti-check" aria-hidden="true"></i>';
-    btn.addEventListener('click',e=>{
-      e.preventDefault();e.stopPropagation();
-      const d=getDone();
-      if(d.has(key)){d.delete(key);card.classList.remove('done');}
-      else{d.add(key);card.classList.add('done');}
-      saveDone(d);updateProgress();
-    });
-    card.insertBefore(btn,card.firstChild);
-  });
-  updateProgress();
-}
-function updateProgress(){
-  const cards=allCards();
-  const total=cards.length;
-  const done=cards.filter(c=>c.classList.contains('done')).length;
-  const pct=total?Math.round(done/total*100):0;
-  document.getElementById('progressFill').style.width=pct+'%';
-  document.getElementById('progressPct').textContent=pct+'%';
-  document.getElementById('progressText').textContent=done+' / '+total+' test tamamlandı';
-}
-function resetProgress(){
-  if(!confirm('Tüm test işaretlerini sıfırlamak istiyor musun?')) return;
-  localStorage.removeItem(DONE_KEY);
-  document.querySelectorAll('.quiz-card.done').forEach(c=>c.classList.remove('done'));
-  updateProgress();
-}
 </script>
 </body>
 </html>
